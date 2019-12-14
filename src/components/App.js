@@ -1,7 +1,9 @@
 import React from 'react';
 
+import AppContainer from './AppContainer/AppContainer'
+
 const App = () => {
-    return <p>Start working Change!</p>
+    return <AppContainer></AppContainer>
 };
 
 export default App;

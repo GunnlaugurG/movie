@@ -1,13 +1,14 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import MiniDrawer from '../common/NavBar';
 
 const AppContainer = () => {
     return (
         <div>
-            <Switch>
-                <Route exact path='/' component={ Home } />
-            </Switch>
+            <MiniDrawer/>
         </div>
     )
 }
+
+export default AppContainer;
 

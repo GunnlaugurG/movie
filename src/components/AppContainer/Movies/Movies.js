@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Home extends React.Component {
+export default class MoviesComponent extends React.Component {
     constructor() {
         super();
     }
@@ -8,7 +8,7 @@ export default class Home extends React.Component {
     render() {
         return (
             <div>
-                <h1>Welcome to the movie app</h1>
+                <h1>WORKS FROM MOVIES</h1>
             </div>
         )
     }
