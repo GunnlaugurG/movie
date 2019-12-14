@@ -186,13 +186,13 @@ function MiniDrawer({ t }) {
             <NavLink exact to="/" activeClassName={classes.activeLink}>
                 <ListItem button key="home" className={classes.icons}>
                     <ListItemIcon>{ <HouseIcon className={classes.icons}/> }</ListItemIcon>
-                    <ListItemText primary={t('home')} />
+                    <ListItemText primary={t('home.title')} />
                 </ListItem>
             </NavLink>
             <NavLink exact to="movies" activeClassName={classes.activeLink}>
                 <ListItem button key="movies" className={classes.icons}>
                     <ListItemIcon>{ <MovieIcon className={classes.icons}/>}</ListItemIcon>
-                    <ListItemText primary={t('movies.movies')} />
+                    <ListItemText primary={t('movies.title')} />
                 </ListItem>
             </NavLink>
         </List>

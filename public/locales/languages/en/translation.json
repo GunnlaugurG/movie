@@ -1,0 +1,9 @@
+{
+    "home": {
+        "title": "Home",
+        "welcome": "Welcome to the greatest movie app of all times"
+    },
+    "movies": {
+        "title": "Movies"
+    }
+}

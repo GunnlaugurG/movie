@@ -2,8 +2,8 @@ import i18n from "i18next";
 import detector from "i18next-browser-languagedetector";
 import { reactI18nextModule } from "react-i18next";
 
-import translationEN from '../public/locales/en/translation.json';
-import translationIS from '../public/locales/is/translation.json';
+import translationEN from '../public/locales/languages/en/translation.json';
+import translationIS from '../public/locales/languages/is/translation.json';
 
 // the translations
 const resources = {
@@ -16,6 +16,7 @@ const resources = {
 };
 
 i18n
+  .use(detector)
   .use(reactI18nextModule) // passes i18n down to react-i18next
   .init({
     resources,
