@@ -7,6 +7,6 @@ import reducers from './reducers'
 import App from './components/App';
 import '../styles/site.css';
 import '../styles/site.less';
-
+import './i18n';
 
 ReactDOM.render(<Provider store={ createStore(reducers)}><Router><App /></Router></Provider>, document.getElementById('app'));

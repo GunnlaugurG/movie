@@ -20,6 +20,9 @@ import MovieIcon from '@material-ui/icons/Movie';
 import Home from '../AppContainer/Home/Home';
 import Movies from '../AppContainer/Movies/Movies'
 import {NavLink, Switch, Route} from 'react-router-dom';
+import i18n from '../../i18n';
+import { withNamespaces } from 'react-i18next';
+// import IS from ''
 
 const drawerWidth = 240;
 
@@ -27,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     color: 'white',
     background: '#424242',
-    height: '100vh',
+    minHeight: '100vh',
     display: 'flex',
   },
   appBar: {
@@ -89,6 +92,14 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
   },
+  toolbarList: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingLeft: "2em",
+    padding: theme.spacing(0, 1),
+    ...theme.mixins.toolbar,
+  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -99,9 +110,16 @@ const useStyles = makeStyles(theme => ({
   activeLink: {
     backgroundColor: "red !important",
  },
+ languageList: {
+   display: 'flex',
+   float: 'right',
+ }
 }));
 
-export default function MiniDrawer() {
+function MiniDrawer({ t }) {
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  }
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -123,7 +141,7 @@ export default function MiniDrawer() {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar className={classes.toolbarList}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -136,8 +154,12 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Mini variant drawer
+            Mr.Movie
           </Typography>
+          <List className={classes.languageList}>
+            <ListItem><img src="../../../public/locales/icons/iceland.png" alt="is" onClick={() => changeLanguage('is')}/></ListItem>
+            <ListItem><img src="../../../public/locales/icons/united-kingdom.png" alt="en" onClick={() => changeLanguage('en')}/></ListItem>
+          </List>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -164,13 +186,13 @@ export default function MiniDrawer() {
             <NavLink exact to="/" activeClassName={classes.activeLink}>
                 <ListItem button key="home" className={classes.icons}>
                     <ListItemIcon>{ <HouseIcon className={classes.icons}/> }</ListItemIcon>
-                    <ListItemText primary="Home" />
+                    <ListItemText primary={t('home')} />
                 </ListItem>
             </NavLink>
             <NavLink exact to="movies" activeClassName={classes.activeLink}>
                 <ListItem button key="movies" className={classes.icons}>
                     <ListItemIcon>{ <MovieIcon className={classes.icons}/>}</ListItemIcon>
-                    <ListItemText primary="Movies" />
+                    <ListItemText primary={t('movies.movies')} />
                 </ListItem>
             </NavLink>
         </List>
@@ -185,3 +207,6 @@ export default function MiniDrawer() {
     </div>
   );
 }
+
+
+export default withNamespaces()(MiniDrawer);
