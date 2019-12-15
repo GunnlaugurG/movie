@@ -4,6 +4,8 @@
         "welcome": "Velkomin/n í fullkomnasta kvikmynda forrit allra tíma"
     },
     "movies": {
-        "title": "Kvikmyndir"
+        "title": "Kvikmyndir",
+        "actors": "Leikarar",
+        "genres": "Flokkar"
     }
 }

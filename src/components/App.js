@@ -20,7 +20,7 @@ class App extends React.Component {
         if ( !cookies.get('token') ) {
             movieServices.getToken().then(token => {
                 cookies.set('token', token, {
-                    maxAge: 60
+                    maxAge: 3600
                 });
                 setToken(token);
             })

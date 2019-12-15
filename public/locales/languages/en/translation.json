@@ -4,6 +4,8 @@
         "welcome": "Welcome to the greatest movie app of all times"
     },
     "movies": {
-        "title": "Movies"
+        "title": "Movies",
+        "actors": "Actors",
+        "genres": "Genres"
     }
 }

@@ -3,7 +3,7 @@ import movieService from '../services/movieServices';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import MoviesList from './MoviesList/MoviesList';
-
+import './styles.less';
 
 class MoviesComponent extends React.Component {
     constructor() {
@@ -45,8 +45,9 @@ class MoviesComponent extends React.Component {
         const { t } = this.props;
         const { movies } = this.state;
         return (
-            <div>
+            <>
                 <h1>{ t('movies.title') }</h1>
+                <div className="movie-container">
                 {
                   !movies 
                     ? 
@@ -54,7 +55,8 @@ class MoviesComponent extends React.Component {
                     :
                     movies.map(movie => <MoviesList key={movie.id} movie={movie}></MoviesList>)  
                 }
-            </div>
+                </div>
+            </>
         )
     }
 }
