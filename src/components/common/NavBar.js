@@ -22,6 +22,7 @@ import Movies from '../AppContainer/Movies/Movies'
 import {NavLink, Switch, Route} from 'react-router-dom';
 import i18n from '../../i18n';
 import { withNamespaces } from 'react-i18next';
+import { withCookies } from 'react-cookie';
 // import IS from ''
 
 const drawerWidth = 240;
@@ -116,8 +117,14 @@ const useStyles = makeStyles(theme => ({
  }
 }));
 
-function MiniDrawer({ t }) {
+function MiniDrawer(props) {
+  const { t, cookies } = props
   const changeLanguage = (lng) => {
+    cookies.set('lang', lng, {
+      // set cookies for on year
+      maxAge: 31536000,
+      sameSite: true
+    })
     i18n.changeLanguage(lng);
   }
   const classes = useStyles();
@@ -209,4 +216,4 @@ function MiniDrawer({ t }) {
 }
 
 
-export default withNamespaces()(MiniDrawer);
+export default withCookies(withNamespaces()(MiniDrawer));

@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '40px !important'
     },
     cotent: {
-        display: 'flex !important'
+        display: 'flex !important',
     },
     image: {
         marginRight: '2em !important',
@@ -37,33 +37,33 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         alignItems: 'baseline',
         flexWrap: 'wrap'
+    },
+    scores: {
+        display: 'flex',
+        justifyContent: 'space-between'
     }
 }));
 
 function MaxWidthDialog(props) {
   const { movie, closeEmitter, t } = props;
+  const enPlot = props.movie.omdb[0] ? props.movie.omdb[0].Plot : movie.plot; 
   console.log(movie);
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const [fullWidth, setFullWidth] = React.useState(true);
-  const [maxWidth, setMaxWidth] = React.useState('sm');
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  let rating = {};
+  if ( movie.omdb[0] ) {
+    for (let i in movie.omdb[0].Ratings) {
+      let item = movie.omdb[0].Ratings[i]
+      rating[item.Source] = item.Value;
+    }
+  }
 
   const handleClose = () => {
     setOpen(false);
     closeEmitter();
   };
 
-  const handleMaxWidthChange = event => {
-    setMaxWidth(event.target.value);
-  };
-
-  const handleFullWidthChange = event => {
-    setFullWidth(event.target.checked);
-  };
 
   const openNewTap = link => {
     window.open(link, "_blank")
@@ -83,9 +83,17 @@ function MaxWidthDialog(props) {
             <p>{movie.alternativeTitles} ({movie.year})</p>
         </DialogTitle>
         <DialogContent className={classes.cotent}>
-            <img src={movie.poster} alt={movie.title} className={classes.image}/>
             <div>
-                <DialogContentText>{movie.plot}</DialogContentText>
+                <img src={movie.poster} alt={movie.title} className={classes.image}/>
+            </div>
+            <div>
+                <div className={classes.scores}>
+                    {rating["Internet Movie Database"] ? <div className={classes.scoreItem}>IMDB: <b>{rating["Internet Movie Database"]}</b></div> : null}
+                    {rating["Rotten Tomatoes"] ? <div className={classes.scoreItem}>Rotten Tomatoes: <b>{rating["Rotten Tomatoes"]}</b></div> : null}
+                    {rating["Metacritic"] ? <div className={classes.scoreItem}>Metacritic: <b>{rating["Metacritic"]}</b></div> : null}
+                </div>
+                <Divider></Divider>
+                <DialogContentText>{props.lng === 'is' ? movie.plot : enPlot }</DialogContentText>
                 <div className={classes.actorGenre}>
                     <div className={classes.actorGenreItem}>{t('movies.actors')} <DialogContentText >{ movie.actors_abridged.map(x => x.name).join(', ') }</DialogContentText></div>
                     <div className={classes.actorGenreItem}>{t('movies.genres')} <DialogContentText >{ movie.genres.map(x => props.lng === 'is' ? x.Name : x['NameEN	']).join(', ') }</DialogContentText></div>

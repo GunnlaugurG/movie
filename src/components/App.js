@@ -4,6 +4,7 @@ import AppContainer from './AppContainer/AppContainer'
 import { withCookies } from 'react-cookie';
 import { connect } from 'react-redux';
 import { setToken } from '../actions/generalActions';
+import i18n from '../i18n';
 
 class App extends React.Component {
     constructor(props) {
@@ -15,12 +16,17 @@ class App extends React.Component {
 
     componentDidMount() {
         const { cookies, setToken } = this.props;
-
+        // set language to cookie, if it exists.
+        if ( cookies.get('lang') ) {
+            i18n.changeLanguage(cookies.get('lang'))
+        }
         // if we cannot find the cookie 'token' we need to fetch new token and set it in cookie and in redux for easy access
         if ( !cookies.get('token') ) {
             movieServices.getToken().then(token => {
                 cookies.set('token', token, {
-                    maxAge: 3600
+                    // set cookie for 24h
+                    maxAge: 86400,
+                    sameSite: true
                 });
                 setToken(token);
             })
