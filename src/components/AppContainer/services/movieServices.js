@@ -1,10 +1,13 @@
 import Axios from "axios";
 
-const movieServices = (props) => {
+const userName = process.env.USERNAME;
+const password = process.env.PASSWORD;
+const movieServices = () => {
+    console.log(process.env.USERNAME);
     return {
-        getToken: (props) => Axios.post('http://api.kvikmyndir.is/authenticate', {
-            username: "gunnlaugur",
-            password: "1.Numberone"
+        getToken: () => Axios.post('http://api.kvikmyndir.is/authenticate', {
+            username: userName,
+            password: password
         }).then(data => {
             return data.data.token;
         }),
