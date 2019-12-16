@@ -3,6 +3,7 @@ import movieService from '../services/movieServices';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import MoviesList from './MoviesList/MoviesList';
+import CircularIndeterminate from '../../common/Loading';
 import './styles.less';
 
 class MoviesComponent extends React.Component {
@@ -10,7 +11,8 @@ class MoviesComponent extends React.Component {
         super();
         this.state = {
             token: '',
-            movies: null
+            movies: null,
+            loading: true
         }
     }
 
@@ -34,7 +36,7 @@ class MoviesComponent extends React.Component {
     getAllMovies(token) {
         movieService.getMovies(token).then(response => {
             if ( !response.data.error ) {
-                this.setState({movies: response.data});
+                this.setState({movies: response.data, loading: false});
             }
         }, err => {
             console.log('error occured dude', err);
@@ -43,17 +45,18 @@ class MoviesComponent extends React.Component {
 
     render() {
         const { t } = this.props;
-        const { movies } = this.state;
+        const { movies, loading } = this.state;
         return (
             <>
                 <h1>{ t('movies.title') }</h1>
                 <div className="movie-container">
                 {
-                  !movies 
+                    loading 
                     ? 
-                    <p>No movies found</p> 
+                    <CircularIndeterminate></CircularIndeterminate>
                     :
-                    movies.map(movie => <MoviesList key={movie.id} movie={movie}></MoviesList>)  
+
+                    movies ? movies.map(movie => <MoviesList key={movie.id} movie={movie}></MoviesList>) : <p>No content</p>  
                 }
                 </div>
             </>
@@ -62,7 +65,6 @@ class MoviesComponent extends React.Component {
 }
 
 const mapStateToProps = reduxStoreState => {
-    const { token } = reduxStoreState;
     return {
       token: reduxStoreState.general
     }

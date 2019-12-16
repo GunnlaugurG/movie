@@ -17,6 +17,10 @@ const useStyles = makeStyles(theme => ({
     },
     cotent: {
         display: 'flex !important',
+        width: '100%'
+    },
+    contentLeft: {
+        width: '100%',
     },
     image: {
         marginRight: '2em !important',
@@ -85,7 +89,7 @@ function MaxWidthDialog(props) {
             <div>
                 <img src={movie.poster} alt={movie.title} className={classes.image}/>
             </div>
-            <div>
+            <div className={classes.contentLeft}>
                 <div className={classes.scores}>
                     {rating["Internet Movie Database"] ? <div className={classes.scoreItem}>IMDB: <b>{rating["Internet Movie Database"]}</b></div> : null}
                     {rating["Rotten Tomatoes"] ? <div className={classes.scoreItem}>Rotten Tomatoes: <b>{rating["Rotten Tomatoes"]}</b></div> : null}
@@ -98,20 +102,7 @@ function MaxWidthDialog(props) {
                     <div className={classes.actorGenreItem}>{t('movies.genres')} <DialogContentText >{ movie.genres.map(x => props.lng === 'is' ? x.Name : x['NameEN	']).join(', ') }</DialogContentText></div>
                 </div>
                 <Divider></Divider>
-                <div>
-                    {movie.showtimes.map(show => {
-                        return (
-                            <div className={classes.showtime} key={show.cinema.id}>
-                                <p>{show.cinema.name}</p>
-                                {show.schedule.map((schedule, index) => {
-                                    return (
-                                        <Button key={schedule.purchase_url} onClick={() => openNewTap(schedule.purchase_url)} color="primary">{schedule.time}</Button>
-                                    )
-                                })}
-                            </div>
-                        )
-                    })}
-                </div>
+
             </div>
         </DialogContent>
         <DialogActions>

@@ -1,7 +1,8 @@
 {
     "home": {
         "title": "Home",
-        "welcome": "Welcome to the greatest movie app of all times"
+        "welcome": "Welcome to the greatest movie app of all times",
+        "upcomming": "Upcomming movies"
     },
     "movies": {
         "title": "Movies",
