@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import MoviesList from './MoviesList/MoviesList';
 import CircularIndeterminate from '../../common/Loading';
-import './styles.less';
+import { Grid } from '@material-ui/core';
 
 class MoviesComponent extends React.Component {
     constructor() {
@@ -55,8 +55,13 @@ class MoviesComponent extends React.Component {
                     ? 
                     <CircularIndeterminate></CircularIndeterminate>
                     :
-
-                    movies ? movies.map(movie => <MoviesList key={movie.id} movie={movie}></MoviesList>) : <p>No content</p>  
+                    <Grid container spacing={3}>
+                        {movies ? movies.map(movie =>  
+                            <Grid  key={movie.id} item md={4} sm={6} xs={12}>
+                                <MoviesList movie={movie}></MoviesList>
+                            </Grid>
+                         ) : <p>No content</p> } 
+                    </Grid>
                 }
                 </div>
             </>

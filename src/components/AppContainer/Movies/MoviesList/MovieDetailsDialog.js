@@ -8,12 +8,11 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withNamespaces } from 'react-i18next';
 import { Divider } from '@material-ui/core';
-import './commonStyles.less';
 
 const useStyles = makeStyles(theme => ({
     dialogStyle: {
         maxHeight: '900px',
-        borderRadius: '40px !important'
+        borderRadius: '20px !important'
     },
     cotent: {
         display: 'flex !important',

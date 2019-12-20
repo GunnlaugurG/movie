@@ -1,10 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import './commonStyles.less'
 
 const useStyles = makeStyles(theme => ({
   root: {
+    'top': '45%',
+    'left': '45%',
     margin: 'auto',
     position: 'fixed',
     '& > * + *': {

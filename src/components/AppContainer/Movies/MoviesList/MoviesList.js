@@ -1,7 +1,6 @@
 import React from 'react';
-import '../styles.less'
 import MovieCard from '../../../common/MovieCard'
-import MovieDetailsDialog from '../../../common/MovieDetailsDialog'
+import MovieDetailsDialog from './MovieDetailsDialog'
 
 class MoviesList extends React.Component {
     constructor(props) {

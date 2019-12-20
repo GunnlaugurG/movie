@@ -10,36 +10,40 @@ import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import { withNamespaces } from 'react-i18next';
 
-const useStyles = makeStyles({
-    card: {
-        width: '23%',
-        margin: '1%',
-        minWidth: '15em',
-        borderRadius: '20px',
-        borderTop: '1px solid white'
-    },
-    subtitle: {
-        color: 'grey'
-    },
-    titleContainer: {
-        display: 'inline-block'
-    },
-    actionArea: {
-        height: '100%',
-    },
-    image: {
-        borderRadius: '20px',
-        border: '1px solid darkgrey'
-    },
-    scores: {
-      display: 'flex',
-      justifyContent: 'space-between'
-    },
-    scoreItem: {
-      display: 'block',
-      width: '30%'
-    }
-});
+const useStyles = makeStyles(theme => ({
+  card: {
+      height: '100%',
+      borderRadius: '20px',
+      borderTop: '1px solid white',
+      '&:hover': {
+        'box-shadow': theme.shadows[12]
+      }
+  },
+  subtitle: {
+      color: 'grey'
+  },
+  titleContainer: {
+      display: 'inline-block'
+  },
+  actionArea: {
+      height: '100%'
+  },
+  image: {
+      borderRadius: '20px',
+      border: '1px solid darkgrey'
+  },
+  content: {
+    height: '100%'
+  },
+  scores: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  scoreItem: {
+    display: 'block',
+    width: '30%'
+  }
+}));
 
 function RecipeReviewCard(props) {
   const { movie, selectEmitter, t } = props;
@@ -59,7 +63,7 @@ function RecipeReviewCard(props) {
 
   return (
     <Card className={classes.card}>
-      <CardActionArea onClick={() => selectEmitter()}>
+      <CardActionArea onClick={() => selectEmitter()} className={classes.actionArea}>
         <CardMedia
           className={classes.image}
           component="img"
@@ -67,7 +71,7 @@ function RecipeReviewCard(props) {
           image={movie.poster}
           title={movie.title}
         />
-        <CardContent>
+        <CardContent className={classes.content}>
             <div className={classes.titleContainer}>
                 <Typography gutterBottom variant="h5" component="h2">
                     {movie.title}
@@ -75,13 +79,6 @@ function RecipeReviewCard(props) {
                 <Typography className={classes.subtitle} gutterBottom variant="body1" component="i">
                     {movie.alternativeTitles}
                 </Typography>
-            </div>
-
-            <Divider></Divider>
-            <div className={classes.scores}>
-              {rating["Internet Movie Database"] ? <div className={classes.scoreItem}><b>IMDB: {rating["Internet Movie Database"]}</b></div> : null}
-              {rating["Rotten Tomatoes"] ? <div className={classes.scoreItem}><b>Rotten Tomatoes: {rating["Rotten Tomatoes"]}</b></div> : null}
-              {rating["Metacritic"] ? <div className={classes.scoreItem}><b>Metacritic: {rating["Metacritic"]}</b></div> : null}
             </div>
         </CardContent>
       </CardActionArea>

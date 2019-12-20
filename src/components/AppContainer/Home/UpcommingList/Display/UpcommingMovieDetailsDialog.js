@@ -13,7 +13,10 @@ import './commonStyles.less';
 const useStyles = makeStyles(theme => ({
     dialogStyle: {
         maxHeight: '900px',
-        borderRadius: '40px !important'
+        borderRadius: '40px !important',
+        '&--root': {
+          'border-radius': '20px !important'
+        }
     },
     cotent: {
         display: 'flex !important',
