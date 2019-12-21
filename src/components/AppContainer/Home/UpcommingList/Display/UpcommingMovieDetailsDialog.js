@@ -8,15 +8,11 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withNamespaces } from 'react-i18next';
 import { Divider } from '@material-ui/core';
-import './commonStyles.less';
 
 const useStyles = makeStyles(theme => ({
     dialogStyle: {
         maxHeight: '900px',
         borderRadius: '40px !important',
-        '&--root': {
-          'border-radius': '20px !important'
-        }
     },
     cotent: {
         display: 'flex !important',
@@ -47,6 +43,9 @@ const useStyles = makeStyles(theme => ({
     scores: {
         display: 'flex',
         justifyContent: 'space-between'
+    },
+    radius: {
+      borderRadius: '20px'
     }
 }));
 
@@ -80,6 +79,7 @@ function MaxWidthDialog(props) {
       <Dialog className={classes.dialogStyle}
                     fullWidth={true}
                     maxWidth="lg"
+                    classes={{paperFullWidth: classes.radius}}
                     scroll="paper"
                     open={open}
                     onClose={handleClose}
@@ -94,9 +94,9 @@ function MaxWidthDialog(props) {
             </div>
             <div className={classes.contentLeft}>
                 <div className={classes.scores}>
-                    {rating["Internet Movie Database"] ? <div className={classes.scoreItem}>IMDB: <b>{rating["Internet Movie Database"]}</b></div> : null}
-                    {rating["Rotten Tomatoes"] ? <div className={classes.scoreItem}>Rotten Tomatoes: <b>{rating["Rotten Tomatoes"]}</b></div> : null}
-                    {rating["Metacritic"] ? <div className={classes.scoreItem}>Metacritic: <b>{rating["Metacritic"]}</b></div> : null}
+                {rating["Internet Movie Database"] ? <div className={classes.scoreItem}><img height={20} src="../../../../../../public/locales/icons/imdb.png"></img> <b>{rating["Internet Movie Database"]}</b></div> : null}
+                    {rating["Rotten Tomatoes"] ? <div className={classes.scoreItem}><img height={20} src="../../../../../../public/locales/icons/rotten.png"></img> <b>{rating["Rotten Tomatoes"]}</b></div> : null}
+                    {rating["Metacritic"] ? <div className={classes.scoreItem}><img height={20} src="../../../../../../public/locales/icons/Metacritic.png"></img> <b>{rating["Metacritic"]}</b></div> : null}
                 </div>
                 <Divider></Divider>
                 <DialogContentText>{props.lng === 'is' ? movie.plot : enPlot }</DialogContentText>

@@ -47,7 +47,6 @@ const useStyles = makeStyles(theme => ({
 
 function RecipeReviewCard(props) {
   const { movie, selectEmitter, t } = props;
-  const enPlot = props.movie.omdb[0] ? props.movie.omdb[0].Plot : movie.plot; 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   let rating = {};
@@ -57,9 +56,6 @@ function RecipeReviewCard(props) {
       rating[item.Source] = item.Value;
     }
   }
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   return (
     <Card className={classes.card}>
@@ -83,9 +79,9 @@ function RecipeReviewCard(props) {
 
             <Divider></Divider>
             <div className={classes.scores}>
-              {rating["Internet Movie Database"] ? <div className={classes.scoreItem}><b>IMDB: {rating["Internet Movie Database"]}</b></div> : null}
-              {rating["Rotten Tomatoes"] ? <div className={classes.scoreItem}><b>Rotten Tomatoes: {rating["Rotten Tomatoes"]}</b></div> : null}
-              {rating["Metacritic"] ? <div className={classes.scoreItem}><b>Metacritic: {rating["Metacritic"]}</b></div> : null}
+              <div className={classes.scoreItem}><b><img height={20} src="../../../public/locales/icons/imdb.png"></img> {rating["Internet Movie Database"] ? rating["Internet Movie Database"] : 'N/A'}</b></div>
+              <div className={classes.scoreItem}><b><img height={20} src="../../../public/locales/icons/rotten.png"></img> {rating["Rotten Tomatoes"] ? rating["Rotten Tomatoes"] : 'N/A'}</b></div>
+              <div className={classes.scoreItem}><b><img height={20} src="../../../public/locales/icons/Metacritic.png"></img> {rating["Metacritic"] ? rating["Metacritic"] : 'N/A'}</b></div>
             </div>
         </CardContent>
       </CardActionArea>

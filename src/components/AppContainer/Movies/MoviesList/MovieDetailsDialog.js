@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withNamespaces } from 'react-i18next';
-import { Divider } from '@material-ui/core';
+import { Divider, Paper } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     dialogStyle: {
@@ -39,6 +39,12 @@ const useStyles = makeStyles(theme => ({
     scores: {
         display: 'flex',
         justifyContent: 'space-between'
+    },
+    radius: {
+        borderRadius: '20px'
+    },
+    paper: {
+        marginBottom: '1em'
     }
 }));
 
@@ -70,6 +76,7 @@ function MaxWidthDialog(props) {
   return (
     <React.Fragment>
       <Dialog className={classes.dialogStyle}
+                    classes={{paperFullWidth: classes.radius}}
                     fullWidth={true}
                     maxWidth="lg"
                     scroll="paper"
@@ -86,9 +93,10 @@ function MaxWidthDialog(props) {
             </div>
             <div>
                 <div className={classes.scores}>
-                    {rating["Internet Movie Database"] ? <div className={classes.scoreItem}>IMDB: <b>{rating["Internet Movie Database"]}</b></div> : null}
-                    {rating["Rotten Tomatoes"] ? <div className={classes.scoreItem}>Rotten Tomatoes: <b>{rating["Rotten Tomatoes"]}</b></div> : null}
-                    {rating["Metacritic"] ? <div className={classes.scoreItem}>Metacritic: <b>{rating["Metacritic"]}</b></div> : null}
+                    
+                    <div className={classes.scoreItem}><img height={20} src="../../../../../public/locales/icons/imdb.png"></img> <b>{rating["Internet Movie Database"] ? rating["Internet Movie Database"] : 'N/A'}</b></div>
+                    <div className={classes.scoreItem}><img height={20} src="../../../../../public/locales/icons/rotten.png"></img> <b>{rating["Rotten Tomatoes"] ? rating["Rotten Tomatoes"] : 'N/A'}</b></div>
+                    <div className={classes.scoreItem}><img height={20} src="../../../../../public/locales/icons/Metacritic.png"></img> <b>{rating["Metacritic"] ? rating["Metacritic"] : 'N/A'}</b></div>
                 </div>
                 <Divider></Divider>
                 <DialogContentText>{props.lng === 'is' ? movie.plot : enPlot }</DialogContentText>
@@ -100,14 +108,16 @@ function MaxWidthDialog(props) {
                 <div>
                     {movie.showtimes.map(show => {
                         return (
-                            <div className={classes.showtime} key={show.cinema.id}>
-                                <p>{show.cinema.name}</p>
-                                {show.schedule.map((schedule, index) => {
-                                    return (
-                                        <Button key={schedule.purchase_url} onClick={() => openNewTap(schedule.purchase_url)} color="primary">{schedule.time}</Button>
-                                    )
-                                })}
-                            </div>
+                            <Paper className={classes.paper}>
+                                <div className={classes.showtime} key={show.cinema.id}>
+                                    <p>{show.cinema.name}</p>
+                                    {show.schedule.map((schedule, index) => {
+                                        return (
+                                            <Button key={schedule.purchase_url} onClick={() => openNewTap(schedule.purchase_url)} color="primary">{schedule.time}</Button>
+                                        )
+                                    })}
+                                </div>
+                            </Paper>
                         )
                     })}
                 </div>
