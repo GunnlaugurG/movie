@@ -15,6 +15,7 @@
 	"dependencies": {
 		"@material-ui/core": "^4.7.2",
 		"@material-ui/icons": "^4.5.1",
+		"@material-ui/lab": "^4.0.0-alpha.36",
 		"axios": "^0.18.0",
 		"i18next": "^19.0.2",
 		"i18next-browser-languagedetector": "^4.0.1",
