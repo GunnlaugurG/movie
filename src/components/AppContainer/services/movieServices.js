@@ -2,8 +2,8 @@ import Axios from "axios";
 
 const userName = process.env.USERNAME;
 const password = process.env.PASSWORD;
+
 const movieServices = () => {
-    console.log(process.env.USERNAME);
     return {
         getToken: () => Axios.post('http://api.kvikmyndir.is/authenticate', {
             username: userName,
@@ -12,23 +12,27 @@ const movieServices = () => {
             return data.data.token;
         }),
 
-        getMovies: (token) => 
-            Axios.get(`http://api.kvikmyndir.is/movies?token=${token}`, {
+        getMovies: (token) => {
+            console.log('getting movies')
+            return Axios.get(`http://api.kvikmyndir.is/movies?token=${token}`, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then(data => {
                 return data
-        }),
+            })
+        },
 
-        getUpcomming: (token) => 
-            Axios.get(`http://api.kvikmyndir.is/upcoming?token=${token}`, {
+        getUpcomming: (token) => {
+            console.log('getting Upcomming')
+            return Axios.get(`http://api.kvikmyndir.is/upcoming?token=${token}`, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then(data => {
                 return data
-        }),
+            })
+        },
     }
 }
 

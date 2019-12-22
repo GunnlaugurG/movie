@@ -1,6 +1,6 @@
 import React from 'react';
-import MovieCard from './Display/UpcommingMovieCard'
-import MovieDetailsDialog from './Display/UpcommingMovieDetailsDialog'
+import MovieCard from './UpcommingMovieCard'
+import MovieDetailsDialog from './UpcommingMovieDetailsDialog'
 
 class UpcommingList extends React.Component {
     constructor(props) {

@@ -22,27 +22,35 @@ class App extends React.Component {
         }
         // if we cannot find the cookie 'token' we need to fetch new token and set it in cookie and in redux for easy access
         if ( !cookies.get('token') ) {
-            movieServices.getToken().then(token => {
-                cookies.set('token', token, {
-                    // set cookie for 24h
-                    maxAge: 86400,
-                    sameSite: true
-                });
-                setToken(token);
-            })
+            this.fetchToken()
         } else {
             // if the cookie exists then we can simply set it in the redux store.
             setToken(cookies.get('token'))
         }
     }
+
+    fetchToken() {
+        const { cookies, setToken } = this.props;
+        
+        movieServices.getToken().then(token => {
+            cookies.set('token', token, {
+                // set cookie for 24h
+                maxAge: 86400,
+                sameSite: true
+            });
+            setToken(token);
+        })
+    }
+
     render() {
         return (<AppContainer></AppContainer>)
     }
 };
 
 const mapStateToProps = reduxStoreState => {
+    const { general } = reduxStoreState;
     return {
-      token: reduxStoreState.general
+      token: general.token
     }
 }
 

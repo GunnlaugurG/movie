@@ -1,5 +1,5 @@
 import React from 'react';
-import MovieCard from '../../../common/MovieCard'
+import MovieCard from '../MovieCard'
 import MovieDetailsDialog from './MovieDetailsDialog'
 
 class MoviesList extends React.Component {

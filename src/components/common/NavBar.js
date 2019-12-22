@@ -17,7 +17,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HouseIcon from '@material-ui/icons/House';
 import MovieIcon from '@material-ui/icons/Movie';
-import Home from '../AppContainer/Home/Home';
+import Home from '../AppContainer/Upcomming/Upcomming';
 import Movies from '../AppContainer/Movies/Movies'
 import {NavLink, Switch, Route} from 'react-router-dom';
 import i18n from '../../i18n';

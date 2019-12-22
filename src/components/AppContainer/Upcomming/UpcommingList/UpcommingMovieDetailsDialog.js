@@ -52,7 +52,6 @@ const useStyles = makeStyles(theme => ({
 function MaxWidthDialog(props) {
   const { movie, closeEmitter, t } = props;
   const enPlot = props.movie.omdb[0] ? props.movie.omdb[0].Plot : movie.plot; 
-  console.log(movie);
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 
