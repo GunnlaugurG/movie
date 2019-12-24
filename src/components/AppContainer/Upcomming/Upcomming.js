@@ -38,7 +38,6 @@ class Upcomming extends React.Component {
             this.getUpcommingMovies(token)
         }
     }
-
     getUpcommingMovies(token) {
         const { setUpcomming } = this.props;
         this.setState({fetched: true});

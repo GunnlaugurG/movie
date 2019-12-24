@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
       color: 'grey'
   },
   titleContainer: {
-      display: 'inline-block'
+	  width: '100%'
   },
   actionArea: {
       height: '100%'
@@ -57,12 +57,29 @@ function RecipeReviewCard(props) {
       rating[item.Source] = item.Value;
     }
   }
+  const month = {
+    '01': 'january',
+    '02': 'february',
+    '03': 'march',
+    '04': 'april',
+    '05': 'may',
+    '06': 'june',
+    '07': 'july',
+    '08': 'agust',
+    '09': 'september',
+    '10': 'october',
+    '11': 'november',
+    '12': 'december',
+  }
+
+  const splitDate = movie['release-dateIS'].split('-');
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   return (
-    <Card className={classes.card}>
+	<Card className={classes.card}>
       <CardActionArea onClick={() => selectEmitter()} className={classes.actionArea}>
         <CardMedia
           className={classes.image}
@@ -77,9 +94,12 @@ function RecipeReviewCard(props) {
                     {movie.title}
                 </Typography>
                 <Typography className={classes.subtitle} gutterBottom variant="body1" component="i">
-                    {movie.alternativeTitles}
+                  {movie.alternativeTitles}
                 </Typography>
-            </div>
+			</div>
+			<b style={{display: 'flex'}}>
+				{splitDate[2]}.<p style={{textTransform: 'capitalize'}}>{t('month.' + month[movie['release-dateIS'].split('-')[1]])}</p>
+			</b>
         </CardContent>
       </CardActionArea>
     </Card>

@@ -8,5 +8,19 @@
         "title": "Kvikmyndir",
         "actors": "Leikarar",
         "genres": "Flokkar"
+    },
+    "month": {
+        "january": "janúar",
+        "february": "febrúar",
+        "march": "mars",
+        "april": "apríl",
+        "may": "maí",
+        "june": "júní",
+        "july": "júlí",
+        "agust": "ágúst",
+        "september": "september",
+        "october": "október",
+        "november": "nóvember",
+        "december": "desember"
     }
 }

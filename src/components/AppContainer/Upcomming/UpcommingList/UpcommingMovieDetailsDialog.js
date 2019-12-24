@@ -1,13 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { withNamespaces } from 'react-i18next';
-import { Divider } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Dialog, 
+		DialogContent,  DialogTitle,
+		Tabs, Tab, Typography, Box } from '@material-ui/core';
+import SwipeableViews from 'react-swipeable-views';
+import AboutView from './AboutView/AboutView';
+import TrailerVideo from '../../../common/TrailerVideo/TrailerVideo';
+import { useMediaQuery  } from '@material-ui/core';
+
 
 const useStyles = makeStyles(theme => ({
     dialogStyle: {
@@ -16,15 +17,15 @@ const useStyles = makeStyles(theme => ({
     },
     cotent: {
         display: 'flex !important',
-        width: '100%'
+		width: '100%',
+		padding: 0
     },
     contentLeft: {
-        width: '100%',
+		width: '100%'
     },
     image: {
-        marginRight: '2em !important',
-        minHeight: '400px',
-        width: "300px",
+		width: '100%',
+		maxHeight: '500px',
         borderRadius: '20px'
     }, 
     actorGenre: {
@@ -35,44 +36,59 @@ const useStyles = makeStyles(theme => ({
     actorGenreItem: {
         width: '50%'
     },
-    showtime: {
-        display: 'flex',
-        alignItems: 'baseline',
-        flexWrap: 'wrap'
-    },
-    scores: {
-        display: 'flex',
-        justifyContent: 'space-between'
-    },
     radius: {
       borderRadius: '20px'
-    }
+	},
+	tab: {
+		width: '100%',
+        '&:focus': {
+            'outline': 'none !important',
+        },
+	},
+	
+	appBar: {
+		color: theme.palette.primary.contrastText,
+		backgroundColor: '#880e4f'
+	},
+	box: {
+		padding: '1em'
+	}
 }));
+
+function TabPanel(props) {
+	const classes = useStyles();
+    const { children, value, index, ...other } = props;
+    return (
+      <Typography
+        component="div"
+        role="tabpanel"
+		hidden={value !== index}
+        id={`scrollable-auto-tabpanel-${index}`}
+        aria-labelledby={`scrollable-auto-tab-${index}`}
+        {...other}
+      >
+        {value === index && <Box classes={{root: classes.box}} p={3}>{children}</Box>}
+      </Typography>
+    );
+}
 
 function MaxWidthDialog(props) {
   const { movie, closeEmitter, t } = props;
-  const enPlot = props.movie.omdb[0] ? props.movie.omdb[0].Plot : movie.plot; 
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-
-  let rating = {};
-  if ( movie.omdb[0] ) {
-    for (let i in movie.omdb[0].Ratings) {
-      let item = movie.omdb[0].Ratings[i]
-      rating[item.Source] = item.Value;
-    }
-  }
+  const theme = useTheme();
+  const [value, setValue] = React.useState(0);
+  
+	console.log(useMediaQuery)
 
   const handleClose = () => {
     setOpen(false);
     closeEmitter();
   };
-
-
-  const openNewTap = link => {
-    window.open(link, "_blank")
-  }
-
+  console.log(movie.trailers[0].results);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
     <React.Fragment>
       <Dialog className={classes.dialogStyle}
@@ -85,10 +101,37 @@ function MaxWidthDialog(props) {
                     aria-labelledby="max-width-dialog-title">
         <DialogTitle id={movie.id} align="center">
             <>{movie.title}</> 
-            <p>{movie.alternativeTitles} ({movie.year})</p>
         </DialogTitle>
-        <DialogContent className={classes.cotent}>
-            <div>
+        <Tabs value={value} onChange={handleChange} classes={{indicator: classes.appBar}}
+		indicatorColor="primary"
+		variant="fullWidth"
+		textColor="inherit"
+		scrollButtons="auto"
+		aria-label="scrollable auto tabs example">
+            <Tab label={ t('movies.title')} classes={{root: classes.tab}}/>
+            <Tab label={ t('home.title')} classes={{root: classes.tab}}/>
+		</Tabs>
+		<DialogContent className={classes.cotent}>
+			<SwipeableViews className={classes.contentLeft} axis={theme.direction === 'ltr' ? 'x-reverse' : 'x'} index={value} onChangeIndex={handleChange}>
+				<TabPanel value={value} index={0} className={classes.topPanel} dir={theme.direction}>
+					<AboutView movie={movie} />
+				</TabPanel>
+				<TabPanel value={value} index={1} className={classes.topPanel} dir={theme.direction}>
+					<TrailerVideo trailers={movie.trailers[0].results}/>		
+				</TabPanel>
+			</SwipeableViews>
+        </DialogContent>
+      </Dialog>
+    </React.Fragment>
+  );
+}
+
+export default withNamespaces()(MaxWidthDialog)
+
+
+/**
+ *             
+ *          <div>
                 <img src={movie.poster} alt={movie.title} className={classes.image}/>
             </div>
             <div className={classes.contentLeft}>
@@ -106,13 +149,4 @@ function MaxWidthDialog(props) {
                 <Divider></Divider>
 
             </div>
-        </DialogContent>
-        <DialogActions>
-
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
-  );
-}
-
-export default withNamespaces()(MaxWidthDialog)
+ */

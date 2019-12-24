@@ -92,7 +92,6 @@ function MaxWidthDialog(props) {
             </div>
             <div>
                 <div className={classes.scores}>
-                    
                     <div className={classes.scoreItem}><img height={20} src="../../../../../public/locales/icons/imdb.png"></img> <b>{rating["Internet Movie Database"] ? rating["Internet Movie Database"] : 'N/A'}</b></div>
                     <div className={classes.scoreItem}><img height={20} src="../../../../../public/locales/icons/rotten.png"></img> <b>{rating["Rotten Tomatoes"] ? rating["Rotten Tomatoes"] : 'N/A'}</b></div>
                     <div className={classes.scoreItem}><img height={20} src="../../../../../public/locales/icons/Metacritic.png"></img> <b>{rating["Metacritic"] ? rating["Metacritic"] : 'N/A'}</b></div>

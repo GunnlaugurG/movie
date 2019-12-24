@@ -8,5 +8,19 @@
         "title": "Movies",
         "actors": "Actors",
         "genres": "Genres"
+    },
+    "month": {
+        "january": "january",
+        "february": "february",
+        "march": "march",
+        "april": "april",
+        "may": "may",
+        "june": "june",
+        "july": "july",
+        "agust": "agust",
+        "september": "september",
+        "october": "october",
+        "november": "november",
+        "december": "december"
     }
 }

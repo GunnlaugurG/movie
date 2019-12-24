@@ -7,7 +7,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { withNamespaces } from 'react-i18next';
 import Upcomming from './Upcomming/Upcomming';
 import Movies from './Movies/Movies';
@@ -18,6 +18,7 @@ import { withCookies } from 'react-cookie';
 import i18n from '../../i18n';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import SwipeableViews from 'react-swipeable-views';
 
 
 const useStyles = makeStyles(theme => ({
@@ -78,6 +79,7 @@ const AppContainer = (props) => {
     const { t, cookies } = props
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
+    const theme = useTheme();
 
     const changeLanguage = (lng) => {
       cookies.set('lang', lng, {
@@ -112,14 +114,16 @@ const AppContainer = (props) => {
                     <Tab label={ t('home.title')} classes={{root: classes.tab}}/>
                 </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0} className={classes.topPanel}>
-                <h1>{ t('movies.title') }</h1>
-                <Movies />
-            </TabPanel>
-            <TabPanel value={value} index={1} className={classes.topPanel}>
-                <h1>{ t('home.title') }</h1>
-                <Upcomming />
-            </TabPanel>
+            <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value} onChangeIndex={handleChange}>
+                <TabPanel value={value} index={0} className={classes.topPanel} dir={theme.direction}>
+                    <h1>{ t('movies.title') }</h1>
+                    <Upcomming />
+                </TabPanel>
+                <TabPanel value={value} index={1} className={classes.topPanel} dir={theme.direction}>
+                    <h1>{ t('home.title') }</h1>
+                    <Movies />
+                </TabPanel>
+            </SwipeableViews>
         </div>
     )
 }
