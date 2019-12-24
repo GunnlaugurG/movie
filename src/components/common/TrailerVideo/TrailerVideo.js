@@ -21,8 +21,8 @@ const TrailerVideo = (props) => {
                 trailers ? 
                     <>
                         {trailers.map((trailer, index) => 
-                            <Grid item className={classes.wrapper} xs={12}>
-                                <iframe key={index} className={classes.player}
+                            <Grid item key={trailer.id} className={classes.wrapper} xs={12}>
+                                <iframe className={classes.player}
                                     src={trailer.url} allowFullScreen>
                                 </iframe>
                             </Grid>

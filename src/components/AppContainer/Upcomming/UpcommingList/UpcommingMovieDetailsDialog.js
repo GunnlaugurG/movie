@@ -84,9 +84,12 @@ function MaxWidthDialog(props) {
     closeEmitter();
   };
   const handleChange = (event, newValue) => {
-    setValue(event);
+    setValue(newValue);
   };
-  console.log(theme)
+  const handleSwipe = (event, newValue) => {
+    setValue(event);
+  }
+
   return (
     <React.Fragment>
       <Dialog className={classes.dialogStyle}
@@ -110,7 +113,7 @@ function MaxWidthDialog(props) {
             <Tab label={ t('movies.trailers')} classes={{root: classes.tab}}/>
 		</Tabs>
 		<DialogContent className={classes.cotent}>
-			<SwipeableViews className={classes.contentLeft} axis="x" index={value} onChangeIndex={handleChange} >
+			<SwipeableViews className={classes.contentLeft} axis="x" index={value} onChangeIndex={handleSwipe} >
 				<TabPanel value={value} index={0} className={classes.topPanel} dir={theme.direction}>
 					<AboutView movie={movie} />
 				</TabPanel>

@@ -90,8 +90,11 @@ const AppContainer = (props) => {
       i18n.changeLanguage(lng);
     }
     const handleChange = (event, newValue) => {
-      setValue(event);
+      setValue(newValue);
     };
+    const handleSwipe = (event, newValue) => {
+        setValue(event)
+    }
     return (
         <div className={classes.main}>
             <AppBar position="static" className={classes.root}>
@@ -114,7 +117,7 @@ const AppContainer = (props) => {
                     <Tab label={ t('home.title')} classes={{root: classes.tab}}/>
                 </Tabs>
             </AppBar>
-            <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value} onChangeIndex={handleChange}>
+            <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value} onChangeIndex={handleSwipe}>
                 <TabPanel value={value} index={0} className={classes.topPanel} dir={theme.direction}>
                     <h1>{ t('movies.title') }</h1>
                     <Upcomming />
