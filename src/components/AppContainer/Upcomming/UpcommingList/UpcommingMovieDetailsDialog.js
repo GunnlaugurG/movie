@@ -76,9 +76,10 @@ function TabPanel(props) {
 function MaxWidthDialog(props) {
   const { movie, closeEmitter, t } = props;
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
   const theme = useTheme();
+  const [open, setOpen] = React.useState(true);
   const [value, setValue] = React.useState(0);
+  
   const handleClose = () => {
     setOpen(false);
     closeEmitter();
