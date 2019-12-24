@@ -65,7 +65,7 @@ module.exports = (env) => {
             extensions: ['.js', '.jsx', '.less', '.css']
         },
         plugins: [
-            new HtmlWebpackPlugin({ title: 'MovieShiz', template: './index.html', inject: 'body' }),
+            new HtmlWebpackPlugin({ title: 'MovieShiz', template: './index.html', inject: 'body', favicon: "./public/locales/icons/favi.png" }),
             new webpack.DefinePlugin(envKeys)
         ],
         devServer: {

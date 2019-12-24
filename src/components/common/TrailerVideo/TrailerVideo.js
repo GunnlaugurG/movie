@@ -1,21 +1,36 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+    wrapper: {
+    },
+    player: {
+        width: '100%',
+        height: '100%',
+    }
+}))
+
 
 const TrailerVideo = (props) => {
+    const classes = useStyles();
     const { trailers } = props;
-    console.log(trailers);
     return (
-        <Grid container>
-            <Grid item>
+        <Grid container spacing={3}>
             {
                 trailers ? 
-                    <iframe style={{width: '100%', height: '100%'}}
-                        src={trailers[0].url} allowFullScreen>
-                    </iframe>
+                    <>
+                        {trailers.map((trailer, index) => 
+                            <Grid item className={classes.wrapper} xs={12}>
+                                <iframe key={index} className={classes.player}
+                                    src={trailer.url} allowFullScreen>
+                                </iframe>
+                            </Grid>
+                        )}
+                    </>
                 :
-                <>No trailers</>
+                <Grid item>No trailers</Grid>
             }
-            </Grid>
         </Grid>
     )
 }

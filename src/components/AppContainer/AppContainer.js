@@ -90,7 +90,7 @@ const AppContainer = (props) => {
       i18n.changeLanguage(lng);
     }
     const handleChange = (event, newValue) => {
-      setValue(newValue);
+      setValue(event);
     };
     return (
         <div className={classes.main}>

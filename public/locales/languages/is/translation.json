@@ -7,7 +7,9 @@
     "movies": {
         "title": "Kvikmyndir",
         "actors": "Leikarar",
-        "genres": "Flokkar"
+        "genres": "Flokkar",
+        "about": "Upplýsingar",
+        "trailers": "Sýnishorn"
     },
     "month": {
         "january": "janúar",
