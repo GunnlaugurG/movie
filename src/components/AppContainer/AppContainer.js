@@ -1,7 +1,4 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import MiniDrawer from '../common/NavBar';
-import { positions } from '@material-ui/system';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -11,15 +8,12 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { withNamespaces } from 'react-i18next';
 import Upcomming from './Upcomming/Upcomming';
 import Movies from './Movies/Movies';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Grid from '@material-ui/core/Grid';
 import { withCookies } from 'react-cookie';
 import i18n from '../../i18n';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import SwipeableViews from 'react-swipeable-views';
-
+import Snack from '../common/SnackBar/Snack';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -55,6 +49,8 @@ const useStyles = makeStyles(theme => ({
     },
     languageList: {
         display: 'flex',
+        padding: 0,
+        margin: 0
     }
 }));
 function TabPanel(props) {
@@ -77,8 +73,9 @@ function TabPanel(props) {
 
 const AppContainer = (props) => {
     const { t, cookies } = props
-    const classes = useStyles();
     const [value, setValue] = React.useState(0);
+    const [SnackBaropen, setOpenSnackBar] = React.useState(false);
+    const classes = useStyles();
     const theme = useTheme();
 
     const changeLanguage = (lng) => {
@@ -88,6 +85,7 @@ const AppContainer = (props) => {
         sameSite: true
       })
       i18n.changeLanguage(lng);
+      setOpenSnackBar(true);
     }
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -95,14 +93,15 @@ const AppContainer = (props) => {
     const handleSwipe = (event, newValue) => {
         setValue(event)
     }
+
     return (
         <div className={classes.main}>
             <AppBar position="static" className={classes.root}>
                 <div className={classes.appBarHeader}>
                     <Typography className={classes.appBarHeaderTitle}>Mr.Movie</Typography>
                     <List className={classes.languageList}>
-                        <ListItem><img src="../../../public/locales/icons/iceland.png" alt="is" onClick={() => changeLanguage('is')}/></ListItem>
-                        <ListItem><img src="../../../public/locales/icons/united-kingdom.png" alt="en" onClick={() => changeLanguage('en')}/></ListItem>
+                        <ListItem><img src="../../../public/locales/icons/iceland.png" height="32px" alt="is" onClick={() => changeLanguage('is')}/></ListItem>
+                        <ListItem><img src="../../../public/locales/icons/united-kingdom.png" height="32px" alt="en" onClick={() => changeLanguage('en')}/></ListItem>
                     </List>
                 </div>
                 <Tabs value={value} onChange={handleChange} classes={{indicator: classes.appBar}}
@@ -127,6 +126,10 @@ const AppContainer = (props) => {
                     <Movies />
                 </TabPanel>
             </SwipeableViews>
+            <Snack  SnackBaropen={SnackBaropen} 
+                    setOpenSnackBar={setOpenSnackBar} 
+                    message={t('language-changed')} 
+                    variant="success" />
         </div>
     )
 }
