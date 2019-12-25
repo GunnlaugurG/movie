@@ -1,19 +1,14 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import { AppBar, Tabs, Tab, Typography, Box, List, ListItem} from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { withNamespaces } from 'react-i18next';
+import i18n from '../../i18n';
+import SwipeableViews from 'react-swipeable-views';
 import Upcomming from './Upcomming/Upcomming';
 import Movies from './Movies/Movies';
 import { withCookies } from 'react-cookie';
-import i18n from '../../i18n';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import SwipeableViews from 'react-swipeable-views';
 import Snack from '../common/SnackBar/Snack';
+import HeaderMenu from './HeaderMenu';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -51,6 +46,15 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         padding: 0,
         margin: 0
+    },
+    tabsRoot: {
+        //position: '-webkit-sticky',
+        //position: 'sticky',
+        //top: 0,
+        //zIndex: 2,
+        //boxShadow: 'inset 0 7px 9px -7px rgba(0,0,0,0.7)',
+        backgroundColor: '#ad1457',
+        color: theme.palette.primary.contrastText
     }
 }));
 function TabPanel(props) {
@@ -78,15 +82,6 @@ const AppContainer = (props) => {
     const classes = useStyles();
     const theme = useTheme();
 
-    const changeLanguage = (lng) => {
-      cookies.set('lang', lng, {
-        // set cookies for on year
-        maxAge: 31536000,
-        sameSite: true
-      })
-      i18n.changeLanguage(lng);
-      setOpenSnackBar(true);
-    }
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
@@ -100,11 +95,11 @@ const AppContainer = (props) => {
                 <div className={classes.appBarHeader}>
                     <Typography className={classes.appBarHeaderTitle}>Mr.Movie</Typography>
                     <List className={classes.languageList}>
-                        <ListItem><img src="../../../public/locales/icons/iceland.png" height="32px" alt="is" onClick={() => changeLanguage('is')}/></ListItem>
-                        <ListItem><img src="../../../public/locales/icons/united-kingdom.png" height="32px" alt="en" onClick={() => changeLanguage('en')}/></ListItem>
+                        <HeaderMenu />
                     </List>
                 </div>
-                <Tabs value={value} onChange={handleChange} classes={{indicator: classes.appBar}}
+            </AppBar>
+            <Tabs value={value} onChange={handleChange} classes={{indicator: classes.appBar, root: classes.tabsRoot}}
                     indicatorColor="primary"
                     variant="fullWidth"
                     centered
@@ -115,23 +110,21 @@ const AppContainer = (props) => {
                     <Tab label={ t('movies.title')} classes={{root: classes.tab}}/>
                     <Tab label={ t('home.title')} classes={{root: classes.tab}}/>
                 </Tabs>
-            </AppBar>
             <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value} onChangeIndex={handleSwipe}>
                 <TabPanel value={value} index={0} className={classes.topPanel} dir={theme.direction}>
                     <h1>{ t('movies.title') }</h1>
-                    <Upcomming />
+                    <Movies />
                 </TabPanel>
                 <TabPanel value={value} index={1} className={classes.topPanel} dir={theme.direction}>
                     <h1>{ t('home.title') }</h1>
-                    <Movies />
+                    <Upcomming />
                 </TabPanel>
             </SwipeableViews>
-            <Snack  SnackBaropen={SnackBaropen} 
-                    setOpenSnackBar={setOpenSnackBar} 
-                    message={t('language-changed')} 
-                    variant="success" />
         </div>
     )
 }
 
 export default  withCookies(withNamespaces()(AppContainer));
+
+//  <ListItem><img src="../../../public/locales/icons/iceland.png" height="32px" alt="is" onClick={() => changeLanguage('is')}/></ListItem>
+//  <ListItem><img src="../../../public/locales/icons/united-kingdom.png" height="32px" alt="en" onClick={() => changeLanguage('en')}/></ListItem>

@@ -12,7 +12,7 @@ import { Divider, Paper } from '@material-ui/core';
 const useStyles = makeStyles(theme => ({
     dialogStyle: {
         maxHeight: '900px',
-        borderRadius: '20px !important'
+        borderRadius: '10px !important'
     },
     cotent: {
         display: 'flex !important',
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
         marginRight: '2em !important',
         minHeight: '400px',
         width: "300px",
-        borderRadius: '20px'
+        borderRadius: '10px'
     }, 
     actorGenre: {
         display: 'flex',
@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'space-between'
     },
     radius: {
-        borderRadius: '20px'
+        borderRadius: '10px'
     },
     paper: {
         marginBottom: '1em'

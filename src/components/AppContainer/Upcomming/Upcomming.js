@@ -43,7 +43,9 @@ class Upcomming extends React.Component {
         this.setState({fetched: true});
         movieService.getUpcomming(token).then(response => {
             if ( !response.data.error ) {
-                this.setState({movies: response.data, loading: false});
+                const sortedMovies = response.data.sort((a,b) => new Date(a['release-dateIS']) - new Date(b['release-dateIS']));
+                console.log(sortedMovies.length === response.data.length)
+                this.setState({movies: sortedMovies, loading: false});
                 setUpcomming(response.data)
             }
         }, err => {
@@ -55,29 +57,27 @@ class Upcomming extends React.Component {
     render() {
         const { t } = this.props;
         const { movies, loading } = this.state;
-
         return (
             <>
                 <div className="movie-container">
                 {
                     loading 
                     ? 
-                    <Grid container spacing={3}>
-                        {[1,2,3,4,5,6].map(key =>  
-                            <Grid  key={key} item md={3} sm={6} xs={12}>
-                                <SkeletonCard/>
-                            </Grid>
-                        )} 
-                    </Grid>
+                        <Grid container spacing={3}>
+                            {[1,2,3,4,5,6].map(key =>  
+                                <Grid  key={key} item md={3} sm={6} xs={12}>
+                                    <SkeletonCard/>
+                                </Grid>
+                            )} 
+                        </Grid>
                     :
-
-                    <Grid container spacing={3}>
-                        {movies ? movies.map(movie =>  
-                            <Grid  key={movie.id} item md={3} sm={6} xs={12}>
-                                <UpcommingList movie={movie}></UpcommingList>
-                            </Grid>
-                         ) : <p>No content</p> } 
-                    </Grid>
+                        <Grid container spacing={3}>
+                            {movies ? movies.map(movie =>  
+                                <Grid  key={movie.id} item md={3} sm={6} xs={12}>
+                                    <UpcommingList movie={movie}></UpcommingList>
+                                </Grid>
+                            ) : <p>No content</p> } 
+                        </Grid>
                 }
                 </div>
             </>

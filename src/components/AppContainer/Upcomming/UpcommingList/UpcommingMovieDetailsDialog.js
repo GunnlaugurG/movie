@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     image: {
 		width: '100%',
 		maxHeight: '500px',
-        borderRadius: '20px'
+        borderRadius: '10px'
     }, 
     actorGenre: {
         display: 'flex',
@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
         width: '50%'
     },
     radius: {
-      borderRadius: '20px'
+      borderRadius: '10px'
 	},
 	tab: {
 		width: '100%',

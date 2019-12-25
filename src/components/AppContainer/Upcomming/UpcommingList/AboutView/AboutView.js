@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
     image: {
 		width: '100%',
 		maxHeight: '500px',
-        borderRadius: '20px'
+        borderRadius: '10px'
     },
     scores: {
         display: 'flex',

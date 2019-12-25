@@ -13,7 +13,6 @@ const movieServices = () => {
         }),
 
         getMovies: (token) => {
-            console.log('getting movies')
             return Axios.get(`http://api.kvikmyndir.is/movies?token=${token}`, {
                 headers: {
                     'Content-Type': 'application/json'
@@ -24,7 +23,6 @@ const movieServices = () => {
         },
 
         getUpcomming: (token) => {
-            console.log('getting Upcomming')
             return Axios.get(`http://api.kvikmyndir.is/upcoming?token=${token}`, {
                 headers: {
                     'Content-Type': 'application/json'

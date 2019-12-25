@@ -4,10 +4,15 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
     wrapper: {
+        position: 'relative',
+        paddingTop: '56.25% !important'
     },
     player: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
         width: '100%',
-        height: '100%',
+        height: '100%'
     }
 }))
 

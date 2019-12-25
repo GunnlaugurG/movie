@@ -10,7 +10,8 @@
         "actors": "Actors",
         "genres": "Genres",
         "about": "About",
-        "trailers": "Trailers"
+        "trailers": "Trailers",
+        "no-movies-today": "No movies in theaters today"
     },
     "month": {
         "january": "january",

@@ -13,7 +13,7 @@ import { withNamespaces } from 'react-i18next';
 const useStyles = makeStyles(theme => ({
     card: {
         height: '100%',
-        borderRadius: '20px',
+        borderRadius: '10px',
         borderTop: '1px solid white',
         '&:hover': {
           'box-shadow': theme.shadows[12]
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
         height: '100%'
     },
     image: {
-        borderRadius: '20px',
+        borderRadius: '10px',
         border: '1px solid darkgrey'
     },
     content: {

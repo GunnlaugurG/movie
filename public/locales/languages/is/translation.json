@@ -10,7 +10,8 @@
         "actors": "Leikarar",
         "genres": "Flokkar",
         "about": "Upplýsingar",
-        "trailers": "Sýnishorn"
+        "trailers": "Sýnishorn",
+        "no-movies-today": "Engar myndir í bíó í dag"
     },
     "month": {
         "january": "janúar",
