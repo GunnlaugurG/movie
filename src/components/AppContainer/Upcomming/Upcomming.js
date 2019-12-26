@@ -12,44 +12,31 @@ class Upcomming extends React.Component {
     constructor() {
         super();
         this.state = {
-            token: '',
             movies: null,
             loading: true,
-            fetched: false,
         }
     }
 
     componentDidMount() {
-        const { token, upcomming } = this.props;
-        // if token is set, then we can fetch upcomming movies
+        const { upcomming } = this.props;
+        // if are not in redux then we need fetch the movies
         if (upcomming) {
             this.setState({movies: upcomming, loading: false});
-        }
-        if ( token && ! upcomming) {
-            this.getUpcommingMovies(token);
+        } else {
+            this.getUpcommingMovies();
         }
     }
 
-    componentDidUpdate(props) {
-        // if the token was not set when component mounted, we wait for the token and the fetch movies.
-        const { token, upcomming } = this.props;
-        const { fetched } = this.state;
-        if ( !upcomming && token && !fetched ) {
-            this.getUpcommingMovies(token)
-        }
-    }
-    getUpcommingMovies(token) {
+    getUpcommingMovies() {
         const { setUpcomming } = this.props;
-        this.setState({fetched: true});
-        movieService.getUpcomming(token).then(response => {
+        movieService.getUpcomming().then(response => {
             if ( !response.data.error ) {
                 const sortedMovies = response.data.sort((a,b) => new Date(a['release-dateIS']) - new Date(b['release-dateIS']));
-                console.log(sortedMovies.length === response.data.length)
                 this.setState({movies: sortedMovies, loading: false});
                 setUpcomming(response.data)
             }
         }, err => {
-            console.log('error occured dude', err);
+            console.error('error occured dude', err);
         })
     }
 
@@ -88,7 +75,6 @@ class Upcomming extends React.Component {
 const mapStateToProps = reduxStoreState => {
     const { general } = reduxStoreState;
     return {
-      token: general.token,
       upcomming: general.upcomming
     }
 }

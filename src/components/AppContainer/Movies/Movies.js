@@ -12,43 +12,30 @@ class MoviesComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            token: '',
             movies: null,
             loading: true,
-            fetched: false
         }
     }
 
     componentDidMount() {
-        const { token, movies } = this.props;
-        // if token is set, then we can fetch the movies
+        const { movies } = this.props;
+        // if are not in redux then we need fetch the movies
         if (movies) {
             this.setState({movies: movies, loading: false});
-        }
-        if ( token && !movies ) {
-            this.getAllMovies(token)
-        }
-    }
-
-    componentDidUpdate(props) {
-        // if the token was not set when component mounted, we wait for the token and the fetch movies.
-        const { token, movies } = this.props;
-        const { fetched } = this.state;
-        if ( !movies && token && !fetched) {
-            this.getAllMovies(token)
+        } else { 
+            this.getAllMovies()
         }
     }
 
-    getAllMovies(token) {
+    getAllMovies() {
         const { setMovies } = this.props;
-        this.setState({fetched: true})
-        movieService.getMovies(token).then(response => {
+        movieService.getMovies().then(response => {
             if ( !response.data.error ) {
                 this.setState({movies: response.data, loading: false});
                 setMovies(response.data)
             }
         }, err => {
-            console.log('error occured dude', err);
+            console.error('error occured dude', err);
         })
     }
 
@@ -86,7 +73,6 @@ class MoviesComponent extends React.Component {
 const mapStateToProps = reduxStoreState => {
     const { general } = reduxStoreState;
     return {
-      token: general.token,
       movies: general.movies
     }
 }

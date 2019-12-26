@@ -104,7 +104,7 @@ function MaxWidthDialog(props) {
                 </div>
                 <Divider></Divider>
                 <div>
-                    {movie.showtimes.map(show => {
+                    {movie.showtimes ? movie.showtimes.map(show => {
                         return (
                             <Paper className={classes.paper}>
                                 <div className={classes.showtime} key={show.cinema.id}>
@@ -117,7 +117,8 @@ function MaxWidthDialog(props) {
                                 </div>
                             </Paper>
                         )
-                    })}
+                    })
+                    : <p>No showtime</p>}
                 </div>
             </div>
         </DialogContent>
