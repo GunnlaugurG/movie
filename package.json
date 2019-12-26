@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "webpack-dev-server --env.ENVIRONMENT=production --config ./webpack.config.js --mode production",
+		"start": "react-scripts start",
+		"start2": "webpack-dev-server --env.ENVIRONMENT=production --config ./webpack.config.js --mode production",
 		"dev": "webpack-dev-server --port 4000 --host 0.0.0.0 --env.ENVIRONMENT=development --config ./webpack.config.js --mode development",
 		"package": "webpack",
 		"heroku-prebuild": "npm install --dev",
@@ -29,6 +30,7 @@
 		"react-i18next": "^9.0.10",
 		"react-redux": "^6.0.1",
 		"react-router-dom": "^4.3.1",
+		"react-scripts": "^3.3.0",
 		"react-swipeable-views": "^0.13.3",
 		"redux": "^4.0.1",
 		"redux-thunk": "^2.3.0",
