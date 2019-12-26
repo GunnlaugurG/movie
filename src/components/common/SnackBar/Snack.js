@@ -22,13 +22,11 @@ export default function Snack(props) {
       }}
       open={SnackBaropen}
       autoHideDuration={2000}
-      onClose={handleSnackBarClose}
-    >
+      onClose={handleSnackBarClose}>
       <MySnackbarContentWrapper
         onClose={handleSnackBarClose}
         variant={variant}
-        message={message}
-      />
+        message={message}/>
     </Snackbar>
   );
 }

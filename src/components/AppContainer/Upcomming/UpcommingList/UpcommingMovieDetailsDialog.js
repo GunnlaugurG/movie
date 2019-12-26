@@ -102,7 +102,10 @@ function MaxWidthDialog(props) {
                     onClose={handleClose}
                     aria-labelledby="max-width-dialog-title">
         <DialogTitle id={movie.id} align="center">
-            <>{movie.title}</> 
+            <>
+              {movie.title}
+              
+            </> 
         </DialogTitle>
         <Tabs value={value} onChange={handleChange} classes={{indicator: classes.appBar, root: classes.tabs}}
               indicatorColor="primary"
