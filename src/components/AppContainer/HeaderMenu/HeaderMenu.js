@@ -3,8 +3,8 @@ import { IconButton, Menu, MenuItem, ListItemIcon, Typography, Divider, Fade } f
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { withNamespaces } from 'react-i18next';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import i18n from '../../i18n';
-import Snack from '../common/SnackBar/Snack'
+import i18n from '../../../i18n';
+import Snack from '../../common/SnackBar/Snack'
 import { withCookies } from 'react-cookie';
 
 const useStyles = makeStyles(theme => ({

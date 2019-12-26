@@ -1,14 +1,11 @@
 import React from 'react';
-import { AppBar, Tabs, Tab, Typography, Box, List, ListItem} from '@material-ui/core'
+import { AppBar, Tabs, Tab, Typography, Box, List } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { withNamespaces } from 'react-i18next';
-import i18n from '../../i18n';
 import SwipeableViews from 'react-swipeable-views';
 import Upcomming from './Upcomming/Upcomming';
 import Movies from './Movies/Movies';
-import { withCookies } from 'react-cookie';
-import Snack from '../common/SnackBar/Snack';
-import HeaderMenu from './HeaderMenu';
+import HeaderMenu from './HeaderMenu/HeaderMenu';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -76,9 +73,8 @@ function TabPanel(props) {
 
 
 const AppContainer = (props) => {
-    const { t, cookies } = props
+    const { t } = props
     const [value, setValue] = React.useState(0);
-    const [SnackBaropen, setOpenSnackBar] = React.useState(false);
     const classes = useStyles();
     const theme = useTheme();
 
@@ -124,7 +120,4 @@ const AppContainer = (props) => {
     )
 }
 
-export default  withCookies(withNamespaces()(AppContainer));
-
-//  <ListItem><img src="../../../public/locales/icons/iceland.png" height="32px" alt="is" onClick={() => changeLanguage('is')}/></ListItem>
-//  <ListItem><img src="../../../public/locales/icons/united-kingdom.png" height="32px" alt="en" onClick={() => changeLanguage('en')}/></ListItem>
+export default  withNamespaces()(AppContainer);
