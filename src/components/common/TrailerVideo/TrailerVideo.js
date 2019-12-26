@@ -91,11 +91,10 @@ const TrailerVideo = (props) => {
                                         value={value}
                                         onChange={handleChange}
                                         aria-label="Vertical tabs example"
-                                        className={classes.tabs}
-                                    >
-                                        {trailers.map((trailer, index) => 
-                                            <Tab key={'y'+ index} label={trailer.name} {...a11yProps(index)} />    
-                                        )}
+                                        className={classes.tabs}>
+                                    {trailers.map((trailer, index) => 
+                                        <Tab key={'y'+ index} label={trailer.name} {...a11yProps(index)} />    
+                                    )}
                                     </Tabs>
                                     {trailers.map((trailer, index) => 
                                         <TabPanel key={'x' +index} value={value} index={index} className={classes.topPanelWrapper}>
