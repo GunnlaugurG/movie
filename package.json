@@ -7,6 +7,7 @@
 		"start": "webpack-dev-server --env.ENVIRONMENT=production --config ./webpack.config.js --mode production",
 		"dev": "webpack-dev-server --port 4000 --host 0.0.0.0 --env.ENVIRONMENT=development --config ./webpack.config.js --mode development",
 		"package": "webpack",
+		"heroku-prebuild": "npm install --dev",
 		"test": "jest",
 		"test:watch": "npm run test -- --watch"
 	},
