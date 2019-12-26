@@ -2,41 +2,40 @@ import React from 'react';
 import { withNamespaces } from 'react-i18next';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Dialog, 
-		DialogContent,  DialogTitle,
-		Tabs, Tab, Typography, Box } from '@material-ui/core';
+		DialogContent, Tabs, Tab, Typography, Box } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
 import AboutView from './AboutView/AboutView';
 import TrailerVideo from '../../../common/TrailerVideo/TrailerVideo';
-
+import DialogTitle from '../../../common/DialogTitle'
 
 const useStyles = makeStyles(theme => ({
-    dialogStyle: {
+  dialogStyle: {
         maxHeight: '900px',
         borderRadius: '40px !important',
-    },
-    cotent: {
-        display: 'flex !important',
+  },
+  cotent: {
+    display: 'flex !important',
 		width: '100%',
 		padding: 0
-    },
-    contentLeft: {
+  },
+  contentLeft: {
 		width: '100%'
-    },
-    image: {
+  },
+  image: {
 		width: '100%',
 		maxHeight: '500px',
-        borderRadius: '10px'
-    }, 
-    actorGenre: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        width: '100%'
-    },
-    actorGenreItem: {
-        width: '50%'
-    },
-    radius: {
-      borderRadius: '10px'
+    borderRadius: '10px'
+  }, 
+  actorGenre: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: '100%'
+  },
+  actorGenreItem: {
+      width: '50%'
+  },
+  radius: {
+    borderRadius: '10px'
 	},
 	tab: {
 		width: '100%',
@@ -53,7 +52,13 @@ const useStyles = makeStyles(theme => ({
 	},
 	box: {
 		padding: '1em'
-	}
+  },
+  selected: {
+    backgroundColor: '#ad1457',
+    color: 'white',
+    borderTopLeftRadius: '10px',
+    borderTopRightRadius: '10px'
+  }
 }));
 
 function TabPanel(props) {
@@ -101,11 +106,8 @@ function MaxWidthDialog(props) {
                     open={open}
                     onClose={handleClose}
                     aria-labelledby="max-width-dialog-title">
-        <DialogTitle id={movie.id} align="center">
-            <>
+        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
               {movie.title}
-              
-            </> 
         </DialogTitle>
         <Tabs value={value} onChange={handleChange} classes={{indicator: classes.appBar, root: classes.tabs}}
               indicatorColor="primary"
@@ -113,18 +115,18 @@ function MaxWidthDialog(props) {
               textColor="inherit"
               scrollButtons="auto"
               aria-label="scrollable auto tabs example">
-            <Tab label={ t('movies.about')} classes={{root: classes.tab}}/>
-            <Tab label={ t('movies.trailers')} classes={{root: classes.tab}}/>
-		</Tabs>
-		<DialogContent className={classes.cotent}>
-			<SwipeableViews className={classes.contentLeft} axis="x" index={value} onChangeIndex={handleSwipe} >
-				<TabPanel value={value} index={0} className={classes.topPanel} dir={theme.direction}>
-					<AboutView movie={movie} />
-				</TabPanel>
-				<TabPanel value={value} index={1} className={classes.topPanel} dir="{theme.direction}">
-					<TrailerVideo trailers={movie.trailers.length > 0 ? movie.trailers[0].results : null}/>		
-				</TabPanel>
-			</SwipeableViews>
+            <Tab label={ t('movies.about')} classes={{root: classes.tab, selected: classes.selected}}/>
+            <Tab label={ t('movies.trailers')} classes={{root: classes.tab, selected: classes.selected}}/>
+		    </Tabs>
+        <DialogContent className={classes.cotent}>
+          <SwipeableViews className={classes.contentLeft} axis="x" index={value} onChangeIndex={handleSwipe} >
+            <TabPanel value={value} index={0} className={classes.topPanel} dir={theme.direction}>
+              <AboutView movie={movie} />
+            </TabPanel>
+            <TabPanel value={value} index={1} className={classes.topPanel} dir="{theme.direction}">
+              <TrailerVideo trailers={movie.trailers.length > 0 ? movie.trailers[0].results : null}/>		
+            </TabPanel>
+          </SwipeableViews>
         </DialogContent>
       </Dialog>
     </React.Fragment>

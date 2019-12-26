@@ -29,6 +29,10 @@ const useStyles = makeStyles(theme => ({
     tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
     },
+    selected: {
+        backgroundColor: '#ad1457',
+        color: 'white'
+    }
 }))
 
 function TabPanel(props) {
@@ -93,7 +97,7 @@ const TrailerVideo = (props) => {
                                         aria-label="Vertical tabs example"
                                         className={classes.tabs}>
                                     {trailers.map((trailer, index) => 
-                                        <Tab key={'y'+ index} label={trailer.name} {...a11yProps(index)} />    
+                                        <Tab key={'y'+ index} label={trailer.name} {...a11yProps(index)}  classes={{selected: classes.selected}} />    
                                     )}
                                     </Tabs>
                                     {trailers.map((trailer, index) => 

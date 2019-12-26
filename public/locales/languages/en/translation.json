@@ -1,12 +1,13 @@
 {
     "language-changed": "Language changed",
     "home": {
-        "title": "Upcomming",
+        "title": "Upcomming Movies",
         "welcome": "Welcome to the greatest movie app of all times",
         "upcomming": "Upcomming movies"
     },
     "movies": {
-        "title": "Movies",
+        "title": "In theaters",
+        "tickets": "Tickets",
         "actors": "Actors",
         "genres": "Genres",
         "about": "About",
