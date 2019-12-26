@@ -1,7 +1,7 @@
 import Axios from "axios";
 
-const userName = process.env.USERNAME;
-const password = process.env.PASSWORD;
+const userName = "Gunnlaugur";
+const password = "1.Numberone";
 
 const movieServices = () => {
     return {
