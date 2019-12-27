@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
       color: 'grey'
   },
   titleContainer: {
-	  width: '100%'
+      display: 'inline-block'
   },
   actionArea: {
       height: '100%'
@@ -33,21 +33,24 @@ const useStyles = makeStyles(theme => ({
       border: '1px solid darkgrey'
   },
   content: {
-    height: '100%'
+    height: '100%',
+    padding: 0,
+    margin: 0
   },
   scores: {
-    display: 'flex',
-    justifyContent: 'space-between'
+    position: 'absolute',
+    padding: '5px 10px',
+    width: '100%'
   },
   scoreItem: {
     display: 'block',
-    width: '30%'
+    width: 'fit-content',
+    backgroundColor: 'rgba(255, 255, 255, .5)',
+    borderRadius: '10px'
   }
 }));
-
 function RecipeReviewCard(props) {
-  const { movie, selectEmitter, t } = props;
-  const enPlot = props.movie.omdb[0] ? props.movie.omdb[0].Plot : movie.plot; 
+  const { movie, selectEmitter } = props;
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   let rating = {};
@@ -72,15 +75,14 @@ function RecipeReviewCard(props) {
     '12': 'december',
   }
 
-  const splitDate = movie['release-dateIS'].split('-');
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
   return (
-	<Card className={classes.card}>
+    <Card className={classes.card}>
       <CardActionArea onClick={() => selectEmitter()} className={classes.actionArea}>
+        <div className={classes.scores}>
+          {rating["Internet Movie Database"] ? <div className={classes.scoreItem}><b style={{'padding': '5px'}}><img height={20} src="../../../public/locales/icons/imdb.png"></img> {rating["Internet Movie Database"].split('/')[0].replace('.', '')}</b></div> : null}
+          {rating["Rotten Tomatoes"] ? <div className={classes.scoreItem}><b style={{'padding': '5px'}}><img height={20} src="../../../public/locales/icons/rotten.png"></img> {rating["Rotten Tomatoes"] ? rating["Rotten Tomatoes"].split('%')[0] : 'N/A'}</b></div> : null}
+          {rating["Metacritic"] ? <div className={classes.scoreItem}><b style={{'padding': '5px'}}><img height={20} src="../../../public/locales/icons/Metacritic.png"></img> {rating["Metacritic"] ? rating["Metacritic"].split('/')[0] : 'N/A'}</b></div>: null}
+        </div>
         <CardMedia
           className={classes.image}
           component="img"
@@ -88,18 +90,10 @@ function RecipeReviewCard(props) {
           image={movie.poster}
           title={movie.title}
         />
-        <CardContent className={classes.content}>
-            <div className={classes.titleContainer}>
-                <Typography gutterBottom variant="h5" component="h2">
-                    {movie.title}
-                </Typography>
-                <Typography className={classes.subtitle} gutterBottom variant="body1" component="i">
-                  {movie.alternativeTitles}
-                </Typography>
-			</div>
-			<b style={{display: 'flex'}}>
-				{splitDate[2]}.<p style={{textTransform: 'capitalize'}}>{t('month.' + month[movie['release-dateIS'].split('-')[1]])}</p>
-			</b>
+        <CardContent classes={{ root: classes.content}}>
+            <Typography  component="h6" variant="caption" style={{ 'paddingLeft': '10px'}}>
+                {movie.title}
+            </Typography>
         </CardContent>
       </CardActionArea>
     </Card>

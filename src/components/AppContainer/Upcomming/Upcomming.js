@@ -50,9 +50,9 @@ class Upcomming extends React.Component {
                 {
                     loading 
                     ? 
-                        <Grid container spacing={3}>
+                        <Grid container spacing={1}>
                             {[1,2,3,4,5,6].map(key =>  
-                                <Grid  key={key} item md={3} sm={6} xs={12}>
+                                <Grid  key={key} item lg={2} md={3} sm={4} xs={6}>
                                     <SkeletonCard/>
                                 </Grid>
                             )} 
@@ -60,7 +60,7 @@ class Upcomming extends React.Component {
                     :
                         <Grid container spacing={3}>
                             {movies ? movies.map(movie =>  
-                                <Grid  key={movie.id} item md={3} sm={6} xs={12}>
+                                <Grid  key={movie.id} item lg={2} md={3} sm={4} xs={6}>
                                     <UpcommingList movie={movie}></UpcommingList>
                                 </Grid>
                             ) : <p>No content</p> } 

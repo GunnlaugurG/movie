@@ -48,17 +48,17 @@ class MoviesComponent extends React.Component {
                 {
                     loading 
                     ? 
-                    <Grid container spacing={3}>
+                    <Grid container spacing={1}>
                         {[1,2,3,4,5,6].map(key =>  
-                            <Grid  key={key} item md={3} sm={6} xs={12}>
+                            <Grid  key={key} item lg={2} md={3} sm={4} xs={6}>
                                 <SkeletonCard/>
                             </Grid>
                         )} 
                     </Grid>
                     :
-                    <Grid container spacing={3}>
+                    <Grid container spacing={1}>
                         {movies.length > 0 ? movies.map(movie =>  
-                            <Grid  key={movie.id} item md={3} sm={6} xs={12}>
+                            <Grid  key={movie.id} item lg={2} md={3} sm={4} xs={6}>
                                 <MoviesList movie={movie}></MoviesList>
                             </Grid>
                          ) : <h3>{ t('movies.no-movies-today') }</h3> } 
