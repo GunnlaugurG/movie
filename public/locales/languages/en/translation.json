@@ -1,0 +1,30 @@
+{
+    "language-changed": "Language changed",
+    "home": {
+        "title": "Upcomming",
+        "welcome": "Welcome to the greatest movie app of all times",
+        "upcomming": "Upcomming movies"
+    },
+    "movies": {
+        "title": "Movies",
+        "actors": "Actors",
+        "genres": "Genres",
+        "about": "About",
+        "trailers": "Trailers",
+        "no-movies-today": "No movies in theaters today"
+    },
+    "month": {
+        "january": "january",
+        "february": "february",
+        "march": "march",
+        "april": "april",
+        "may": "may",
+        "june": "june",
+        "july": "july",
+        "agust": "agust",
+        "september": "september",
+        "october": "october",
+        "november": "november",
+        "december": "december"
+    }
+}

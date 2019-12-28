@@ -1,0 +1,30 @@
+{
+    "language-changed": "Tungumáli breytt",
+    "home": {
+        "title": "Væntanlegt",
+        "welcome": "Velkomin/n í fullkomnasta kvikmynda forrit allra tíma",
+        "upcomming": "Væntanlegar myndir"
+    },
+    "movies": {
+        "title": "Kvikmyndir",
+        "actors": "Leikarar",
+        "genres": "Flokkar",
+        "about": "Upplýsingar",
+        "trailers": "Sýnishorn",
+        "no-movies-today": "Engar myndir í bíó í dag"
+    },
+    "month": {
+        "january": "janúar",
+        "february": "febrúar",
+        "march": "mars",
+        "april": "apríl",
+        "may": "maí",
+        "june": "júní",
+        "july": "júlí",
+        "agust": "ágúst",
+        "september": "september",
+        "october": "október",
+        "november": "nóvember",
+        "december": "desember"
+    }
+}

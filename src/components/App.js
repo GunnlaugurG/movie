@@ -1,7 +1,58 @@
 import React from 'react';
+import movieServices from './AppContainer/services/movieServices'
+import AppContainer from './AppContainer/AppContainer'
+import { withCookies } from 'react-cookie';
+import { connect } from 'react-redux';
+import { setToken } from '../actions/generalActions';
+import i18n from '../i18n';
 
-const App = () => {
-    return <p>Start working Change!</p>
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            token: null
+        }
+    }
+
+    componentDidMount() {
+        const { cookies, setToken } = this.props;
+        // set language to cookie, if it exists.
+        if ( cookies.get('lang') ) {
+            i18n.changeLanguage(cookies.get('lang'))
+        }
+        // if we cannot find the cookie 'token' we need to fetch new token and set it in cookie and in redux for easy access
+        if ( !cookies.get('token') ) {
+            this.fetchToken()
+        } else {
+            // if the cookie exists then we can simply set it in the redux store.
+            setToken(cookies.get('token'))
+        }
+    }
+
+    fetchToken() {
+        const { cookies, setToken } = this.props;
+        
+        movieServices.getToken().then(token => {
+            cookies.set('token', token, {
+                // set cookie for 24h
+                maxAge: 86400,
+                sameSite: true
+            });
+            setToken(token);
+        })
+    }
+
+    render() {
+        return (<AppContainer></AppContainer>)
+    }
 };
 
-export default App;
+const mapStateToProps = reduxStoreState => {
+    const { general } = reduxStoreState;
+    return {
+      token: general.token
+    }
+}
+
+export default withCookies(connect(mapStateToProps, { setToken })(App));
+
