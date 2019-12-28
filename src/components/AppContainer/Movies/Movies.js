@@ -12,43 +12,30 @@ class MoviesComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            token: '',
             movies: null,
             loading: true,
-            fetched: false
         }
     }
 
     componentDidMount() {
-        const { token, movies } = this.props;
-        // if token is set, then we can fetch the movies
+        const { movies } = this.props;
+        // if are not in redux then we need fetch the movies
         if (movies) {
             this.setState({movies: movies, loading: false});
-        }
-        if ( token && !movies ) {
-            this.getAllMovies(token)
-        }
-    }
-
-    componentDidUpdate(props) {
-        // if the token was not set when component mounted, we wait for the token and the fetch movies.
-        const { token, movies } = this.props;
-        const { fetched } = this.state;
-        if ( !movies && token && !fetched) {
-            this.getAllMovies(token)
+        } else { 
+            this.getAllMovies()
         }
     }
 
-    getAllMovies(token) {
+    getAllMovies() {
         const { setMovies } = this.props;
-        this.setState({fetched: true})
-        movieService.getMovies(token).then(response => {
+        movieService.getMovies().then(response => {
             if ( !response.data.error ) {
                 this.setState({movies: response.data, loading: false});
                 setMovies(response.data)
             }
         }, err => {
-            console.log('error occured dude', err);
+            console.error('error occured dude', err);
         })
     }
 
@@ -61,17 +48,17 @@ class MoviesComponent extends React.Component {
                 {
                     loading 
                     ? 
-                    <Grid container spacing={3}>
+                    <Grid container spacing={1}>
                         {[1,2,3,4,5,6].map(key =>  
-                            <Grid  key={key} item md={3} sm={6} xs={12}>
+                            <Grid  key={key} item lg={2} md={3} sm={4} xs={6}>
                                 <SkeletonCard/>
                             </Grid>
                         )} 
                     </Grid>
                     :
-                    <Grid container spacing={3}>
+                    <Grid container spacing={1}>
                         {movies.length > 0 ? movies.map(movie =>  
-                            <Grid  key={movie.id} item md={3} sm={6} xs={12}>
+                            <Grid  key={movie.id} item lg={2} md={3} sm={4} xs={6}>
                                 <MoviesList movie={movie}></MoviesList>
                             </Grid>
                          ) : <h3>{ t('movies.no-movies-today') }</h3> } 
@@ -86,7 +73,6 @@ class MoviesComponent extends React.Component {
 const mapStateToProps = reduxStoreState => {
     const { general } = reduxStoreState;
     return {
-      token: general.token,
       movies: general.movies
     }
 }

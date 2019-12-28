@@ -13,7 +13,9 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.primary.contrastText
     },
     main: {
-        backgroundColor: '#424242',
+        background: 'url(https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) no-repeat center center',
+        backgroundAttachment: 'fixed',
+        backgroundSize: 'cover',
         flexGrow: 1,
         width: '100%',
     }, 
@@ -109,11 +111,11 @@ const AppContainer = (props) => {
             <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value} onChangeIndex={handleSwipe}>
                 <TabPanel value={value} index={0} className={classes.topPanel} dir={theme.direction}>
                     <h1>{ t('movies.title') }</h1>
-                    <Upcomming />
+                    <Movies />
                 </TabPanel>
                 <TabPanel value={value} index={1} className={classes.topPanel} dir={theme.direction}>
                     <h1>{ t('home.title') }</h1>
-                    <Movies />
+                    <Upcomming />
                 </TabPanel>
             </SwipeableViews>
         </div>

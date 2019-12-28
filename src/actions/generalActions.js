@@ -1,11 +1,4 @@
-import { SET_TOKEN, SET_MOVIES, SET_UPCOMMING } from '../constants'
-
-export const setToken = token => {
-    return {
-        type: SET_TOKEN,
-        payload: token
-    }
-}
+import { SET_MOVIES, SET_UPCOMMING } from '../constants'
 
 export const setMovies = movies => {
     return {

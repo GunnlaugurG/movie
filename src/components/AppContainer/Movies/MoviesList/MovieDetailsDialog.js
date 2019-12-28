@@ -1,77 +1,134 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Dialog, Divider, Paper, ButtonDialog,
+        DialogActions, DialogContent, DialogContentText, 
+        Button, Tabs, Tab, Typography, Box } from '@material-ui/core';
 import { withNamespaces } from 'react-i18next';
-import { Divider, Paper } from '@material-ui/core';
+import SwipeableViews from 'react-swipeable-views';
 
-const useStyles = makeStyles(theme => ({
-    dialogStyle: {
-        maxHeight: '900px',
-        borderRadius: '10px !important'
-    },
-    cotent: {
+import Tickets from './Tickets/Tickets'
+import AboutView from '../../Upcomming/UpcommingList/AboutView/AboutView';
+import TrailerVideo from '../../../common/TrailerVideo/TrailerVideo'
+import DialogTitle from '../../../common/DialogTitle';
+
+
+const MakeStyle = movie => {
+  const useStyles = makeStyles(theme => {
+    return {
+      dialogStyle: {
+          maxHeight: '900px',
+          borderRadius: '10px !important'
+      },
+      content: {
         display: 'flex !important',
-    },
-    image: {
-        marginRight: '2em !important',
-        minHeight: '400px',
-        width: "300px",
-        borderRadius: '10px'
-    }, 
-    actorGenre: {
-        display: 'flex',
-        flexWrap: 'wrap',
+        width: '100%',
+        padding: 0,
+        backgroundRepeat: 'no-repeat', 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center',
+        color: 'white !important'
+      },
+      contentLeft: {
         width: '100%'
-    },
-    actorGenreItem: {
-        width: '50%'
-    },
-    showtime: {
-        display: 'flex',
-        alignItems: 'baseline',
-        flexWrap: 'wrap'
-    },
-    scores: {
-        display: 'flex',
-        justifyContent: 'space-between'
-    },
-    radius: {
-        borderRadius: '10px'
-    },
-    paper: {
-        marginBottom: '1em'
-    }
-}));
+      },
+      image: {
+          marginRight: '2em !important',
+          minHeight: '400px',
+          width: "300px",
+          borderRadius: '10px'
+      }, 
+      actorGenre: {
+          display: 'flex',
+          flexWrap: 'wrap',
+          width: '100%'
+      },
+      actorGenreItem: {
+          width: '50%'
+      },
+      showtime: {
+          display: 'flex',
+          alignItems: 'baseline',
+          flexWrap: 'wrap'
+      },
+      scores: {
+          display: 'flex',
+          justifyContent: 'space-between'
+      },
+      radius: {
+          borderRadius: '10px',
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${movie ? movie.poster : null})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          border: '1px solid',
+          color: 'white'
+      },
+      paper: {
+          marginBottom: '1em'
+      },
+      tab: {
+      width: '100%',
+          '&:focus': {
+              'outline': 'none !important',
+          },
+      },
+      tabs: {
+          boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+      },
+      appBar: {
+          color: theme.palette.primary.contrastText,
+          backgroundColor: '#880e4f',
+      },
+      box: {
+          padding: '1em'
+      },
+      selected: {
+          backgroundColor: '#ad1457',
+          color: 'white',
+          borderTopLeftRadius: '10px',
+          borderTopRightRadius: '10px'
+      }}
+  });
+  return useStyles();
+}
+
+
+function TabPanel(props) {
+	const classes = MakeStyle();
+    const { children, value, index, ...other } = props;
+    return (
+      <Typography
+        component="div"
+        role="tabpanel"
+        hidden={value !== index}
+        id={`scrollable-auto-tabpanel-${index}`}
+        aria-labelledby={`scrollable-auto-tab-${index}`}
+        {...other}
+      >
+        {value === index && <Box classes={{root: classes.box}} p={3}>{children}</Box>}
+      </Typography>
+    );
+}
 
 function MaxWidthDialog(props) {
   const { movie, closeEmitter, t } = props;
   const enPlot = props.movie.omdb[0] ? props.movie.omdb[0].Plot : movie.plot; 
-  const classes = useStyles();
+  const classes = MakeStyle(movie);
+  const theme = useTheme();
   const [open, setOpen] = React.useState(true);
-
-  let rating = {};
-  if ( movie.omdb[0] ) {
-    for (let i in movie.omdb[0].Ratings) {
-      let item = movie.omdb[0].Ratings[i]
-      rating[item.Source] = item.Value;
-    }
-  }
+  const [value, setValue] = React.useState(0);
 
   const handleClose = () => {
     setOpen(false);
     closeEmitter();
   };
 
-
-  const openNewTap = link => {
-    window.open(link, "_blank")
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  const handleSwipe = (event, newValue) => {
+    setValue(event);
   }
-
   return (
     <React.Fragment>
       <Dialog className={classes.dialogStyle}
@@ -82,48 +139,32 @@ function MaxWidthDialog(props) {
                     open={open}
                     onClose={handleClose}
                     aria-labelledby="max-width-dialog-title">
-        <DialogTitle id={movie.id} align="center">
-            <>{movie.title}</> 
-            <p>{movie.alternativeTitles} ({movie.year})</p>
+        <DialogTitle id={movie.id} onClose={handleClose}>
+            <>{movie.title}</>
         </DialogTitle>
-        <DialogContent className={classes.cotent}>
-            <div>
-                <img src={movie.poster} alt={movie.title} className={classes.image}/>
-            </div>
-            <div>
-                <div className={classes.scores}>
-                    <div className={classes.scoreItem}><img height={20} src="../../../../../public/locales/icons/imdb.png"></img> <b>{rating["Internet Movie Database"] ? rating["Internet Movie Database"] : 'N/A'}</b></div>
-                    <div className={classes.scoreItem}><img height={20} src="../../../../../public/locales/icons/rotten.png"></img> <b>{rating["Rotten Tomatoes"] ? rating["Rotten Tomatoes"] : 'N/A'}</b></div>
-                    <div className={classes.scoreItem}><img height={20} src="../../../../../public/locales/icons/Metacritic.png"></img> <b>{rating["Metacritic"] ? rating["Metacritic"] : 'N/A'}</b></div>
-                </div>
-                <Divider></Divider>
-                <DialogContentText>{props.lng === 'is' ? movie.plot : enPlot }</DialogContentText>
-                <div className={classes.actorGenre}>
-                    <div className={classes.actorGenreItem}>{t('movies.actors')} <DialogContentText >{ movie.actors_abridged.map(x => x.name).join(', ') }</DialogContentText></div>
-                    <div className={classes.actorGenreItem}>{t('movies.genres')} <DialogContentText >{ movie.genres.map(x => props.lng === 'is' ? x.Name : x['NameEN	']).join(', ') }</DialogContentText></div>
-                </div>
-                <Divider></Divider>
-                <div>
-                    {movie.showtimes.map(show => {
-                        return (
-                            <Paper className={classes.paper}>
-                                <div className={classes.showtime} key={show.cinema.id}>
-                                    <p>{show.cinema.name}</p>
-                                    {show.schedule.map((schedule, index) => {
-                                        return (
-                                            <Button key={schedule.purchase_url} onClick={() => openNewTap(schedule.purchase_url)} color="primary">{schedule.time}</Button>
-                                        )
-                                    })}
-                                </div>
-                            </Paper>
-                        )
-                    })}
-                </div>
-            </div>
+        <Tabs value={value} onChange={handleChange} classes={{indicator: classes.appBar, root: classes.tabs}}
+              indicatorColor="primary"
+              variant="fullWidth"
+              textColor="inherit"
+              scrollButtons="auto"
+              aria-label="scrollable auto tabs example">
+            <Tab label={ t('movies.about')} classes={{root: classes.tab, selected: classes.selected}}/>
+            <Tab label={ t('movies.tickets')} classes={{root: classes.tab, selected: classes.selected}}/>
+            <Tab label={ t('movies.trailers')} classes={{root: classes.tab, selected: classes.selected}}/>
+        </Tabs>
+        <DialogContent className={classes.content} >
+        <SwipeableViews className={classes.contentLeft} axis="x" index={value} onChangeIndex={handleSwipe} >
+            <TabPanel value={value} index={0} className={classes.topPanel} dir={theme.direction}>
+                <AboutView movie={movie} />
+            </TabPanel>
+            <TabPanel value={value} index={1} className={classes.topPanel} dir="{theme.direction}">
+                <Tickets showtimes={movie.showtimes}/>
+            </TabPanel>
+            <TabPanel value={value} index={2} className={classes.topPanel} dir="{theme.direction}">
+                <TrailerVideo trailers={movie.trailers.length > 0 ? movie.trailers[0].results : null}/>		
+            </TabPanel>
+        </SwipeableViews>
         </DialogContent>
-        <DialogActions>
-
-        </DialogActions>
       </Dialog>
     </React.Fragment>
   );

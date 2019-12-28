@@ -28,7 +28,7 @@ class MoviesList extends React.Component {
             {selected ? 
                 <MovieDetailsDialog movie={movie} closeEmitter={() => this.closeDialog()}></MovieDetailsDialog>
                 : 
-                <p></p>}
+                null}
             <MovieCard movie={movie} selectEmitter={() => this.selectHandler()}></MovieCard>
             </>
         );

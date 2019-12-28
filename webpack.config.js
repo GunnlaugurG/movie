@@ -58,14 +58,20 @@ module.exports = (env) => {
                     {
                         loader: "css-loader"
                     }]
-                }
+                },
+                {
+                  test: /\.(png|svg|jpg|gif)$/,
+                  use: [
+                    'file-loader',
+                  ],
+                },
             ]
         },
         resolve: {
-            extensions: ['.js', '.jsx', '.less', '.css']
+            extensions: ['.js', '.jsx', '.less', '.css', 'png']
         },
         plugins: [
-            new HtmlWebpackPlugin({ title: 'MovieShiz', template: './index.html', inject: 'body', favicon: "./public/locales/icons/favi.png" }),
+            new HtmlWebpackPlugin({ title: 'IceMovies', template: './index.html', inject: 'body', favicon: "./src/icons/favi.png" }),
             new webpack.DefinePlugin(envKeys)
         ],
         devServer: {
