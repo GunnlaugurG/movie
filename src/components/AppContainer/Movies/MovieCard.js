@@ -12,7 +12,9 @@ const useStyles = makeStyles(theme => ({
     card: {
         height: '100%',
         borderRadius: '10px',
-        borderTop: '1px solid white',
+        border: '1px solid white',
+        backgroundColor: 'rgba(255,255,255,0.2)',
+        color: 'white',
         '&:hover': {
           'box-shadow': theme.shadows[12]
         }
@@ -27,8 +29,8 @@ const useStyles = makeStyles(theme => ({
         height: '100%'
     },
     image: {
-        borderRadius: '10px',
-        border: '1px solid darkgrey'
+        borderRadius: '10px 10px 0px 0px',
+        boxShadow: '1px 7px 7px -5px rgba(255,255,255,0.7)',
     },
     content: {
       height: '100%',
@@ -43,7 +45,7 @@ const useStyles = makeStyles(theme => ({
     scoreItem: {
       display: 'block',
       width: 'fit-content',
-      backgroundColor: 'rgba(255, 255, 255, .5)',
+      backgroundColor: 'rgba(0, 0, 0, .5)',
       borderRadius: '10px'
     }
 }));
@@ -77,8 +79,8 @@ function RecipeReviewCard(props) {
           title={movie.title}
         />
         <CardContent classes={{ root: classes.content}}>
-            <Typography  component="h6" variant="caption" style={{ 'paddingLeft': '10px'}}>
-                {movie.title}-{matches}
+            <Typography  component="h6" variant="caption" style={{ 'paddingLeft': '10px', 'paddingTop': '5px', 'fontWeight': '800'}}>
+                {movie.title}
             </Typography>
         </CardContent>
       </CardActionArea>

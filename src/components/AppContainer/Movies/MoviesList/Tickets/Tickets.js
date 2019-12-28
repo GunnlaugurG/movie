@@ -4,11 +4,17 @@ import { Paper, Button } from '@material-ui/core';
 import { withNamespaces } from 'react-i18next';
 const useStyles = makeStyles(theme => ({
     paper: {
-        marginBottom: '1em'
+        marginBottom: '1em',
+        backgroundColor: 'rgba(0,0,0, 0.4)',
+        color: 'white'
     },
     cinemaName: {
         marginBottom: 'auto',
         paddingLeft: '10px'
+    },
+    time: {
+        border: '1px solid white',
+        marginRight: '1em'
     }
 }));
 
@@ -28,7 +34,7 @@ function Tickets(props) {
                         <p className={classes.cinemaName}>{show.cinema.name}</p>
                         {show.schedule.map((schedule, index) => {
                             return(
-                                <Button  key={schedule.purchase_url} onClick={() => openNewTap(schedule.purchase_url)} color="primary">{schedule.time}</Button>
+                                <Button className={classes.time} key={schedule.purchase_url} onClick={() => openNewTap(schedule.purchase_url)} color="inherit">{schedule.time}</Button>
                             )
                         })}
                     </Paper>)

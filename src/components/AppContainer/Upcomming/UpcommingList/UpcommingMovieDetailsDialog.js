@@ -8,61 +8,89 @@ import AboutView from './AboutView/AboutView';
 import TrailerVideo from '../../../common/TrailerVideo/TrailerVideo';
 import DialogTitle from '../../../common/DialogTitle'
 
-const useStyles = makeStyles(theme => ({
-  dialogStyle: {
-        maxHeight: '900px',
-        borderRadius: '40px !important',
-  },
-  cotent: {
-    display: 'flex !important',
-		width: '100%',
-		padding: 0
-  },
-  contentLeft: {
-		width: '100%'
-  },
-  image: {
-		width: '100%',
-		maxHeight: '500px',
-    borderRadius: '10px'
-  }, 
-  actorGenre: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    width: '100%'
-  },
-  actorGenreItem: {
-      width: '50%'
-  },
-  radius: {
-    borderRadius: '10px'
-	},
-	tab: {
-		width: '100%',
-        '&:focus': {
-            'outline': 'none !important',
-        },
-  },
-  tabs: {
-    boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
-  },
-	appBar: {
-		color: theme.palette.primary.contrastText,
-		backgroundColor: '#880e4f',
-	},
-	box: {
-		padding: '1em'
-  },
-  selected: {
-    backgroundColor: '#ad1457',
-    color: 'white',
-    borderTopLeftRadius: '10px',
-    borderTopRightRadius: '10px'
-  }
-}));
+const MakeStyle = movie => {
+  const useStyles = makeStyles(theme => {
+    console.log(theme);
+    return {
+      dialogStyle: {
+          maxHeight: '900px',
+          borderRadius: '10px !important'
+      },
+      content: {
+        display: 'flex !important',
+        width: '100%',
+        padding: 0,
+        backgroundRepeat: 'no-repeat', 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center',
+        color: 'white !important'
+      },
+      contentLeft: {
+        width: '100%'
+      },
+      image: {
+          marginRight: '2em !important',
+          minHeight: '400px',
+          width: "300px",
+          borderRadius: '10px'
+      }, 
+      actorGenre: {
+          display: 'flex',
+          flexWrap: 'wrap',
+          width: '100%'
+      },
+      actorGenreItem: {
+          width: '50%'
+      },
+      showtime: {
+          display: 'flex',
+          alignItems: 'baseline',
+          flexWrap: 'wrap'
+      },
+      scores: {
+          display: 'flex',
+          justifyContent: 'space-between'
+      },
+      radius: {
+          borderRadius: '10px',
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${movie ? movie.poster : null})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          border: '1px solid',
+          color: 'white'
+      },
+      paper: {
+          marginBottom: '1em'
+      },
+      tab: {
+      width: '100%',
+          '&:focus': {
+              'outline': 'none !important',
+          },
+      },
+      tabs: {
+          boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+      },
+      appBar: {
+          color: theme.palette.primary.contrastText,
+          backgroundColor: '#880e4f',
+      },
+      box: {
+          padding: '1em'
+      },
+      selected: {
+          backgroundColor: '#ad1457',
+          color: 'white',
+          borderTopLeftRadius: '10px',
+          borderTopRightRadius: '10px'
+      }}
+  });
+  return useStyles();
+}
 
 function TabPanel(props) {
-	const classes = useStyles();
+	const classes = MakeStyle();
     const { children, value, index, ...other } = props;
     return (
       <Typography
@@ -80,7 +108,7 @@ function TabPanel(props) {
 
 function MaxWidthDialog(props) {
   const { movie, closeEmitter, t } = props;
-  const classes = useStyles();
+  const classes = MakeStyle(movie);
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const [value, setValue] = React.useState(0);
@@ -99,6 +127,7 @@ function MaxWidthDialog(props) {
   return (
     <React.Fragment>
       <Dialog className={classes.dialogStyle}
+                    classes={{paperFullWidth: classes.radius}}
                     fullWidth={true}
                     maxWidth="lg"
                     classes={{paperFullWidth: classes.radius}}

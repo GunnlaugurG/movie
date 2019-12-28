@@ -13,7 +13,9 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.primary.contrastText
     },
     main: {
-        backgroundColor: '#424242',
+        background: 'url(https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) no-repeat center center',
+        backgroundAttachment: 'fixed',
+        backgroundSize: 'cover',
         flexGrow: 1,
         width: '100%',
     }, 

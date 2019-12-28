@@ -18,7 +18,11 @@ const useStyles = makeStyles(theme => ({
         width: '100%'
     },
     contentText: {
-        paddingTop: '1em'
+        paddingTop: '1em',
+        color: 'white'
+    },
+    actorGenre: {
+        color: 'white'
     }
 }));
 
@@ -50,8 +54,8 @@ const AboutView = (props) => {
                 <Divider />
                 <DialogContentText className={classes.contentText}>{props.lng === 'is' ? movie.plot : enPlot }</DialogContentText>
                 <div className={classes.actorGenre}>
-                    <div className={classes.actorGenreItem}>{t('movies.actors')} <DialogContentText >{ movie.actors_abridged.map(x => x.name).join(', ') }</DialogContentText></div>
-                    <div className={classes.actorGenreItem}>{t('movies.genres')} <DialogContentText >{ movie.genres.map(x => props.lng === 'is' ? x.Name : x['NameEN	']).join(', ') }</DialogContentText></div>
+                    <div className={classes.actorGenreItem}>{t('movies.actors')} <DialogContentText color="inherit">{ movie.actors_abridged.map(x => x.name).join(', ') }</DialogContentText></div>
+                    <div className={classes.actorGenreItem}>{t('movies.genres')} <DialogContentText color="inherit">{ movie.genres.map(x => props.lng === 'is' ? x.Name : x['NameEN	']).join(', ') }</DialogContentText></div>
                 </div>
             </Grid>
         </Grid>
