@@ -7,6 +7,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { withNamespaces } from 'react-i18next';
+import imdb from '../../../icons/imdb.png';
+import rotten from '../../../icons/rotten.png';
+import metra from '../../../icons/Metacritic.png';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -16,7 +19,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: 'rgba(255,255,255,0.2)',
         color: 'white',
         '&:hover': {
-          'box-shadow': theme.shadows[12]
+          'box-shadow': '1px 7px 7px -5px rgba(255,255,255,0.7)'
         }
     },
     subtitle: {
@@ -67,9 +70,9 @@ function RecipeReviewCard(props) {
     <Card className={classes.card}>
       <CardActionArea onClick={() => selectEmitter()} className={classes.actionArea}>
         <div className={classes.scores}>
-          {rating["Internet Movie Database"] ? <div className={classes.scoreItem}><b style={{'padding': '5px'}}><img height={20} src="../../../public/locales/icons/imdb.png"></img> {rating["Internet Movie Database"].split('/')[0].replace('.', '')}</b></div> : null}
-          {rating["Rotten Tomatoes"] ? <div className={classes.scoreItem}><b style={{'padding': '5px'}}><img height={20} src="../../../public/locales/icons/rotten.png"></img> {rating["Rotten Tomatoes"] ? rating["Rotten Tomatoes"].split('%')[0] : 'N/A'}</b></div> : null}
-          {rating["Metacritic"] ? <div className={classes.scoreItem}><b style={{'padding': '5px'}}><img height={20} src="../../../public/locales/icons/Metacritic.png"></img> {rating["Metacritic"] ? rating["Metacritic"].split('/')[0] : 'N/A'}</b></div>: null}
+          {rating["Internet Movie Database"] ? <div className={classes.scoreItem}><b style={{'padding': '5px'}}><img height={20} src={imdb}></img> {rating["Internet Movie Database"].split('/')[0].replace('.', '')}</b></div> : null}
+          {rating["Rotten Tomatoes"] ? <div className={classes.scoreItem}><b style={{'padding': '5px'}}><img height={20} src={rotten}></img> {rating["Rotten Tomatoes"] ? rating["Rotten Tomatoes"].split('%')[0] : 'N/A'}</b></div> : null}
+          {rating["Metacritic"] ? <div className={classes.scoreItem}><b style={{'padding': '5px'}}><img height={20} src={metra}></img> {rating["Metacritic"] ? rating["Metacritic"].split('/')[0] : 'N/A'}</b></div>: null}
         </div>
         <CardMedia
           className={classes.image}

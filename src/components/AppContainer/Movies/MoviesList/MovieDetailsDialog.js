@@ -14,7 +14,6 @@ import DialogTitle from '../../../common/DialogTitle';
 
 const MakeStyle = movie => {
   const useStyles = makeStyles(theme => {
-    console.log(theme);
     return {
       dialogStyle: {
           maxHeight: '900px',
@@ -130,7 +129,6 @@ function MaxWidthDialog(props) {
   const handleSwipe = (event, newValue) => {
     setValue(event);
   }
-  console.log(classes.radius);
   return (
     <React.Fragment>
       <Dialog className={classes.dialogStyle}

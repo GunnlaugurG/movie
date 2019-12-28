@@ -2,6 +2,9 @@ import React from 'react';
 import { Grid, Divider, DialogContentText } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { withNamespaces } from 'react-i18next';
+import imdb from '../../../../../icons/imdb.png';
+import rotten from '../../../../../icons/rotten.png';
+import metra from '../../../../../icons/Metacritic.png';
 
 const useStyles = makeStyles(theme => ({
     image: {
@@ -47,9 +50,9 @@ const AboutView = (props) => {
             </Grid>
             <Grid item xs={12} md={8}>
                 <div className={classes.scores}>
-                    <div className={classes.scoreItem}><img height={20} src="../../../../../../public/locales/icons/imdb.png"></img> <b>{rating["Internet Movie Database"] ? rating["Internet Movie Database"] : "N/A"}</b></div>
-                    <div className={classes.scoreItem}><img height={20} src="../../../../../../public/locales/icons/rotten.png"></img> <b>{rating["Rotten Tomatoes"] ? rating["Rotten Tomatoes"] : "N/A"}</b></div>
-                    <div className={classes.scoreItem}><img height={20} src="../../../../../../public/locales/icons/Metacritic.png"></img> <b>{rating["Metacritic"] ? rating["Metacritic"] : "N/A"}</b></div>
+                    <div className={classes.scoreItem}><img height={20} src={imdb}></img> <b>{rating["Internet Movie Database"] ? rating["Internet Movie Database"] : "N/A"}</b></div>
+                    <div className={classes.scoreItem}><img height={20} src={rotten}></img> <b>{rating["Rotten Tomatoes"] ? rating["Rotten Tomatoes"] : "N/A"}</b></div>
+                    <div className={classes.scoreItem}><img height={20} src={metra}></img> <b>{rating["Metacritic"] ? rating["Metacritic"] : "N/A"}</b></div>
                 </div>
                 <Divider />
                 <DialogContentText className={classes.contentText}>{props.lng === 'is' ? movie.plot : enPlot }</DialogContentText>

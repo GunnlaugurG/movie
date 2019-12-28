@@ -21,7 +21,6 @@ const useStyles = makeStyles(theme => ({
 function Tickets(props) {
     const classes = useStyles();
     const { showtimes } = props;
-    console.log(showtimes);
     const openNewTap = link => {
         window.open(link, "_blank")
     }
@@ -29,12 +28,12 @@ function Tickets(props) {
     return (
         <>
             {showtimes ?
-                showtimes.map((show) => {
-                    return (<Paper className={classes.paper} key={show.cinema.id}>
+                showtimes.map((show, index) => {
+                    return (<Paper className={classes.paper} key={index}>
                         <p className={classes.cinemaName}>{show.cinema.name}</p>
-                        {show.schedule.map((schedule, index) => {
+                        {show.schedule.map((schedule, index2) => {
                             return(
-                                <Button className={classes.time} key={schedule.purchase_url} onClick={() => openNewTap(schedule.purchase_url)} color="inherit">{schedule.time}</Button>
+                                <Button className={classes.time} key={index+"-"+index2} onClick={() => openNewTap(schedule.purchase_url)} color="inherit">{schedule.time}</Button>
                             )
                         })}
                     </Paper>)

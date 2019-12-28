@@ -3,7 +3,6 @@ import { withNamespaces } from 'react-i18next';
 import { connect } from 'react-redux';
 import movieService from '../services/movieServices';
 import UpcommingList from './UpcommingList/UpcommingList';
-import CircularIndeterminate from '../../common/Loading';
 import SkeletonCard from '../../common/Skeleton'
 import { Grid } from '@material-ui/core';
 import { setUpcomming } from '../../../actions/generalActions'

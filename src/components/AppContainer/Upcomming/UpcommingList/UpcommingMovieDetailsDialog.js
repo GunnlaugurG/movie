@@ -10,7 +10,6 @@ import DialogTitle from '../../../common/DialogTitle'
 
 const MakeStyle = movie => {
   const useStyles = makeStyles(theme => {
-    console.log(theme);
     return {
       dialogStyle: {
           maxHeight: '900px',
