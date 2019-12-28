@@ -52,12 +52,20 @@ const useStyles = makeStyles(theme => ({
     width: 'fit-content',
     backgroundColor: 'rgba(0, 0, 0, .5)',
     borderRadius: '10px'
+  },
+  release: {
+    marginTop: '-30px',
+    position: 'absolute',
+    right: '10px',
+    backgroundColor: 'rgba(0, 0, 0, .5)',
+    borderRadius: '10px',
+    padding: '0 10px',
   }
 }));
 function RecipeReviewCard(props) {
-  const { movie, selectEmitter } = props;
+  const { movie, selectEmitter, t } = props;
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const splitDate = movie['release-dateIS'].split('-');
   let rating = {};
   if ( movie.omdb[0] ) {
     for (let i in movie.omdb[0].Ratings) {
@@ -79,7 +87,7 @@ function RecipeReviewCard(props) {
     '11': 'november',
     '12': 'december',
   }
-
+  console.log(movie['release-dateIS']);
   return (
     <Card className={classes.card}>
       <CardActionArea onClick={() => selectEmitter()} className={classes.actionArea}>
@@ -88,15 +96,19 @@ function RecipeReviewCard(props) {
           {rating["Rotten Tomatoes"] ? <div className={classes.scoreItem}><b style={{'padding': '5px'}}><img height={20} src={rotten}></img> {rating["Rotten Tomatoes"] ? rating["Rotten Tomatoes"].split('%')[0] : 'N/A'}</b></div> : null}
           {rating["Metacritic"] ? <div className={classes.scoreItem}><b style={{'padding': '5px'}}><img height={20} src={metra}></img> {rating["Metacritic"] ? rating["Metacritic"].split('/')[0] : 'N/A'}</b></div>: null}
         </div>
-        <CardMedia
-          className={classes.image}
-          component="img"
-          alt={movie.title}
-          image={movie.poster}
-          title={movie.title}
-        />
+        <div>
+          <CardMedia
+            className={classes.image}
+            component="img"
+            alt={movie.title}
+            image={movie.poster}
+            title={movie.title}/>
+            <Typography className={classes.release} component="p" color="inherit">
+              {splitDate[2]}.{t('month.' + month[movie['release-dateIS'].split('-')[1]])}
+            </Typography>
+        </div>
         <CardContent classes={{ root: classes.content}}>
-            <Typography  component="h6" variant="caption" style={{ 'paddingLeft': '10px', 'paddingTop': '5px', 'fontWeight': '800'}}>
+            <Typography component="h6" variant="caption" style={{ 'paddingLeft': '10px', 'paddingTop': '5px', 'fontWeight': '800'}}>
                 {movie.title}
             </Typography>
         </CardContent>
