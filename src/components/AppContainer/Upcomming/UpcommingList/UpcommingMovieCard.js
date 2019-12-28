@@ -9,47 +9,63 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import { withNamespaces } from 'react-i18next';
+import imdb from '../../../../icons/imdb.png';
+import rotten from '../../../../icons/rotten.png';
+import metra from '../../../../icons/Metacritic.png';
 
 const useStyles = makeStyles(theme => ({
   card: {
-      height: '100%',
-      borderRadius: '10px',
-      borderTop: '1px solid white',
-      '&:hover': {
-        'box-shadow': theme.shadows[12]
-      }
+    height: '100%',
+    borderRadius: '10px',
+    border: '1px solid white',
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    color: 'white',
+    '&:hover': {
+      'box-shadow': theme.shadows[12]
+    }
   },
   subtitle: {
       color: 'grey'
   },
   titleContainer: {
-	  width: '100%'
+      display: 'inline-block'
   },
   actionArea: {
       height: '100%'
   },
   image: {
-      borderRadius: '10px',
-      border: '1px solid darkgrey'
+      borderRadius: '10px 10px 0px 0px',
+      boxShadow: '1px 7px 7px -5px rgba(255,255,255,0.7)',
   },
   content: {
-    height: '100%'
+    height: '100%',
+    padding: 0,
+    margin: 0
   },
   scores: {
-    display: 'flex',
-    justifyContent: 'space-between'
+    position: 'absolute',
+    padding: '5px 10px',
+    width: '100%'
   },
   scoreItem: {
     display: 'block',
-    width: '30%'
+    width: 'fit-content',
+    backgroundColor: 'rgba(0, 0, 0, .5)',
+    borderRadius: '10px'
+  },
+  release: {
+    marginTop: '-30px',
+    position: 'absolute',
+    right: '10px',
+    backgroundColor: 'rgba(0, 0, 0, .5)',
+    borderRadius: '10px',
+    padding: '0 10px',
   }
 }));
-
 function RecipeReviewCard(props) {
   const { movie, selectEmitter, t } = props;
-  const enPlot = props.movie.omdb[0] ? props.movie.omdb[0].Plot : movie.plot; 
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const splitDate = movie['release-dateIS'].split('-');
   let rating = {};
   if ( movie.omdb[0] ) {
     for (let i in movie.omdb[0].Ratings) {
@@ -71,35 +87,30 @@ function RecipeReviewCard(props) {
     '11': 'november',
     '12': 'december',
   }
-
-  const splitDate = movie['release-dateIS'].split('-');
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
+  console.log(movie['release-dateIS']);
   return (
-	<Card className={classes.card}>
+    <Card className={classes.card}>
       <CardActionArea onClick={() => selectEmitter()} className={classes.actionArea}>
-        <CardMedia
-          className={classes.image}
-          component="img"
-          alt={movie.title}
-          image={movie.poster}
-          title={movie.title}
-        />
-        <CardContent className={classes.content}>
-            <div className={classes.titleContainer}>
-                <Typography gutterBottom variant="h5" component="h2">
-                    {movie.title}
-                </Typography>
-                <Typography className={classes.subtitle} gutterBottom variant="body1" component="i">
-                  {movie.alternativeTitles}
-                </Typography>
-			</div>
-			<b style={{display: 'flex'}}>
-				{splitDate[2]}.<p style={{textTransform: 'capitalize'}}>{t('month.' + month[movie['release-dateIS'].split('-')[1]])}</p>
-			</b>
+        <div className={classes.scores}>
+          {rating["Internet Movie Database"] ? <div className={classes.scoreItem}><b style={{'padding': '5px'}}><img height={20} src={imdb}></img> {rating["Internet Movie Database"].split('/')[0].replace('.', '')}</b></div> : null}
+          {rating["Rotten Tomatoes"] ? <div className={classes.scoreItem}><b style={{'padding': '5px'}}><img height={20} src={rotten}></img> {rating["Rotten Tomatoes"] ? rating["Rotten Tomatoes"].split('%')[0] : 'N/A'}</b></div> : null}
+          {rating["Metacritic"] ? <div className={classes.scoreItem}><b style={{'padding': '5px'}}><img height={20} src={metra}></img> {rating["Metacritic"] ? rating["Metacritic"].split('/')[0] : 'N/A'}</b></div>: null}
+        </div>
+        <div>
+          <CardMedia
+            className={classes.image}
+            component="img"
+            alt={movie.title}
+            image={movie.poster}
+            title={movie.title}/>
+            <Typography className={classes.release} component="p" color="inherit">
+              {splitDate[2]}.{t('month.' + month[movie['release-dateIS'].split('-')[1]])}
+            </Typography>
+        </div>
+        <CardContent classes={{ root: classes.content}}>
+            <Typography component="h6" variant="caption" style={{ 'paddingLeft': '10px', 'paddingTop': '5px', 'fontWeight': '800'}}>
+                {movie.title}
+            </Typography>
         </CardContent>
       </CardActionArea>
     </Card>

@@ -6,6 +6,8 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import i18n from '../../../i18n';
 import Snack from '../../common/SnackBar/Snack'
 import { withCookies } from 'react-cookie';
+import ice from '../../../icons/iceland.png';
+import uk from '../../../icons/united-kingdom.png';
 
 const useStyles = makeStyles(theme => ({
     listItemIconRoot: {
@@ -60,13 +62,13 @@ const HeaderMenu = props => {
                 <MenuItem classes={{root: classes.menuItemRoot}} onClick={() => changeLanguage('is')}>
                     <Typography variant="inherit">Íslenska</Typography>
                     <ListItemIcon classes={{ root: classes.listItemIconRoot}}>
-                        <img src="../../../public/locales/icons/iceland.png" height="32px" alt="is" onClick={() => changeLanguage('is')}/>
+                        <img src={ice} height="32px" alt="is"/>
                     </ListItemIcon>
                 </MenuItem>
                 <MenuItem classes={{root: classes.menuItemRoot}} onClick={() => changeLanguage('en')}>
                     <Typography variant="inherit">English</Typography>
                     <ListItemIcon classes={{ root: classes.listItemIconRoot}}>
-                        <img src="../../../public/locales/icons/united-kingdom.png" height="32px" alt="is" onClick={() => changeLanguage('is')}/>
+                        <img src={uk} height="32px" alt="en"/>
                     </ListItemIcon>
                 </MenuItem>
             </Menu>

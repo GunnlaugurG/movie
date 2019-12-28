@@ -1,19 +1,12 @@
-import { SET_TOKEN, SET_MOVIES, SET_UPCOMMING } from '../constants';
+import { SET_MOVIES, SET_UPCOMMING } from '../constants';
 
 let initialState = {
-    token: '',
     movies: null,
     upcomming: null
 }
 
 export default function(state = initialState, action) {
     switch (action.type) {
-        case SET_TOKEN:
-            return ({
-                ...state,
-                token: action.payload
-            });
-            break;
         case SET_MOVIES:
             return ({
                 ...state,

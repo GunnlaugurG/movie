@@ -1,19 +1,9 @@
 import Axios from "axios";
 
-const userName = process.env.USERNAME;
-const password = process.env.PASSWORD;
-
 const movieServices = () => {
     return {
-        getToken: () => Axios.post('http://api.kvikmyndir.is/authenticate', {
-            username: userName,
-            password: password
-        }).then(data => {
-            return data.data.token;
-        }),
-
-        getMovies: (token) => {
-            return Axios.get(`http://api.kvikmyndir.is/movies?token=${token}`, {
+        getMovies: () => {
+            return Axios.get(`https://icemovieserver.herokuapp.com/api/movies/movies`, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -22,8 +12,8 @@ const movieServices = () => {
             })
         },
 
-        getUpcomming: (token) => {
-            return Axios.get(`http://api.kvikmyndir.is/upcoming?token=${token}`, {
+        getUpcomming: () => {
+            return Axios.get(`https://icemovieserver.herokuapp.com/api/movies/upcoming`, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

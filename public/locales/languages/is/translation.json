@@ -1,13 +1,14 @@
 {
     "language-changed": "Tungumáli breytt",
     "home": {
-        "title": "Væntanlegt",
+        "title": "Væntanlegt í bíó",
         "welcome": "Velkomin/n í fullkomnasta kvikmynda forrit allra tíma",
         "upcomming": "Væntanlegar myndir"
     },
     "movies": {
-        "title": "Kvikmyndir",
+        "title": "Í bío",
         "actors": "Leikarar",
+        "tickets": "Miðar",
         "genres": "Flokkar",
         "about": "Upplýsingar",
         "trailers": "Sýnishorn",
