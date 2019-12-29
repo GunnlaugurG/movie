@@ -4,7 +4,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Dialog, 
 		DialogContent, Tabs, Tab, Typography, Box } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
-import AboutView from './AboutView/AboutView';
+import AboutView from '../../../common/AboutView/AboutView';
 import TrailerVideo from '../../../common/TrailerVideo/TrailerVideo';
 import DialogTitle from '../../../common/DialogTitle'
 

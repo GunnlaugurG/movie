@@ -15,17 +15,20 @@
         "no-movies-today": "No movies in theaters today"
     },
     "month": {
-        "january": "january",
-        "february": "february",
-        "march": "march",
-        "april": "april",
-        "may": "may",
-        "june": "june",
-        "july": "july",
-        "agust": "agust",
-        "september": "september",
-        "october": "october",
-        "november": "november",
-        "december": "december"
+        "january": "January",
+        "february": "February",
+        "march": "March",
+        "april": "April",
+        "may": "May",
+        "june": "June",
+        "july": "July",
+        "agust": "Agust",
+        "september": "September",
+        "october": "October",
+        "november": "November",
+        "december": "December"
+    },
+    "filter": {
+        "cinema": "Cinema"
     }
 }

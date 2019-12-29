@@ -87,7 +87,7 @@ function RecipeReviewCard(props) {
     '11': 'november',
     '12': 'december',
   }
-  console.log(movie['release-dateIS']);
+  
   return (
     <Card className={classes.card}>
       <CardActionArea onClick={() => selectEmitter()} className={classes.actionArea}>

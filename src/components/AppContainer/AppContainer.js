@@ -110,11 +110,9 @@ const AppContainer = (props) => {
                 </Tabs>
             <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value} onChangeIndex={handleSwipe}>
                 <TabPanel value={value} index={0} className={classes.topPanel} dir={theme.direction}>
-                    <h1>{ t('movies.title') }</h1>
                     <Movies />
                 </TabPanel>
                 <TabPanel value={value} index={1} className={classes.topPanel} dir={theme.direction}>
-                    <h1>{ t('home.title') }</h1>
                     <Upcomming />
                 </TabPanel>
             </SwipeableViews>

@@ -7,7 +7,7 @@ import { withNamespaces } from 'react-i18next';
 import SwipeableViews from 'react-swipeable-views';
 
 import Tickets from './Tickets/Tickets'
-import AboutView from '../../Upcomming/UpcommingList/AboutView/AboutView';
+import AboutView from '../../../common/AboutView/AboutView';
 import TrailerVideo from '../../../common/TrailerVideo/TrailerVideo'
 import DialogTitle from '../../../common/DialogTitle';
 
@@ -129,6 +129,7 @@ function MaxWidthDialog(props) {
   const handleSwipe = (event, newValue) => {
     setValue(event);
   }
+  console.log(movie);
   return (
     <React.Fragment>
       <Dialog className={classes.dialogStyle}

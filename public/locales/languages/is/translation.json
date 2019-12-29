@@ -27,5 +27,8 @@
         "october": "október",
         "november": "nóvember",
         "december": "desember"
+    },
+    "filter": {
+        "cinema": "Bíóhús"
     }
 }

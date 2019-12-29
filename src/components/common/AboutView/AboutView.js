@@ -2,9 +2,9 @@ import React from 'react';
 import { Grid, Divider, DialogContentText } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { withNamespaces } from 'react-i18next';
-import imdb from '../../../../../icons/imdb.png';
-import rotten from '../../../../../icons/rotten.png';
-import metra from '../../../../../icons/Metacritic.png';
+import imdb from '../../../icons/imdb.png';
+import rotten from '../../../icons/rotten.png';
+import metra from '../../../icons/Metacritic.png';
 
 const useStyles = makeStyles(theme => ({
     image: {

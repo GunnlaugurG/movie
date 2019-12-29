@@ -42,9 +42,10 @@ class Upcomming extends React.Component {
 
     render() {
         const { t } = this.props;
-        const { movies, loading } = this.state;
+        const { loading, movies } = this.state;
         return (
             <>
+                <h1>{ t('home.title') }</h1>
                 <div className="movie-container">
                 {
                     loading 
