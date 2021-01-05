@@ -19,7 +19,7 @@
 		"@material-ui/icons": "^4.5.1",
 		"@material-ui/lab": "^4.0.0-alpha.36",
 		"@material-ui/utils": "^4.7.1",
-		"axios": "^0.18.0",
+		"axios": "^0.21.1",
 		"express": "^4.17.1",
 		"i18next": "^19.0.2",
 		"i18next-browser-languagedetector": "^4.0.1",
